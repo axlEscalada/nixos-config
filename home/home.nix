@@ -1,4 +1,4 @@
-{ hyprland, pkgs, ...}: {
+{ hyprland, pkgs, inputs, ...}: {
 
   imports = [
     hyprland.homeManagerModules.default
@@ -14,21 +14,23 @@
   };
 
   home.packages = (with pkgs; [
+    #lang
+    zigpkgs.master
     
     #User Apps
     celluloid
     discord
     librewolf
-    cool-retro-term
     bibata-cursors
     vscode
     lollypop
     lutris
     openrgb
     betterdiscord-installer
-    
 
     #utils
+    ripgrep
+    jq
     ranger
     wlr-randr
     git

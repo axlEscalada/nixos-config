@@ -19,7 +19,7 @@ let
 	  config.allowUnfree = true;	
   };
   lib = nixpkgs.lib;
-
+  overlays = [ zig.overlays.default ];
 in {
 nixosConfigurations = {
   axl = lib.nixosSystem rec {
@@ -28,6 +28,7 @@ nixosConfigurations = {
       modules = [ 
         ./nixos/configuration.nix
         hyprland.nixosModules.default
+	{ nixpkgs.overlays = overlays; }
         home-manager.nixosModules.home-manager
         {
           home-manager.useGlobalPkgs = true;
