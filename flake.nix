@@ -4,6 +4,7 @@
 inputs = {
   nixpkgs.url = "github:nixos/nixpkgs/nixos-unstable";
   zig.url = "github:mitchellh/zig-overlay";
+  musnix.url = "github:musnix/musnix"; 
   home-manager = {
    url = "github:nix-community/home-manager";
    inputs.nixpkgs.follows = "nixpkgs";
@@ -11,7 +12,7 @@ inputs = {
   hyprland.url = "github:hyprwm/Hyprland";
 };
 
-outputs = { self, nixpkgs, home-manager, hyprland, zig, ...}: 
+outputs = { self, nixpkgs, home-manager, hyprland, zig, musnix, ...}: 
 let
   system = "x86_64-linux";
   pkgs = import nixpkgs {
@@ -28,6 +29,7 @@ nixosConfigurations = {
       modules = [ 
         ./nixos/configuration.nix
         hyprland.nixosModules.default
+	musnix.nixosModules.musnix
 	{ nixpkgs.overlays = overlays; }
         home-manager.nixosModules.home-manager
         {

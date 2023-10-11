@@ -1,11 +1,65 @@
 { config, pkgs, ... }:
-
 {
+  home.file.".config/kitty/rose-pine-custom.conf".text = '' 
+## name: Rosé Pine Custom
+foreground               #575279
+background               #050505
+selection_foreground     #575279
+selection_background     #dfdad9
+
+cursor                   #cecacd
+cursor_text_color        #575279
+
+url_color                #907aa9
+
+active_tab_foreground    #575279
+active_tab_background    #f2e9e1
+inactive_tab_foreground  #9893a5
+inactive_tab_background  #faf4ed
+
+active_border_color      #575279
+inactive_border_color    #dfdad9
+
+# black
+color0   #f2e9e1
+color8   #9893a5
+
+# red
+color1   #b4637a
+color9   #b4637a
+
+# green
+color2   #575279
+color10  #575279
+
+# yellow
+color3   #ea9d34
+color11  #ea9d34
+
+# blue
+color4   #56949f
+color12  #56949f
+
+# magenta
+color5   #907aa9
+color13  #907aa9
+
+# cyan
+color6   #d7827e
+color14  #d7827e
+
+# white
+color7   #575279
+color15  #575279
+  '';
   home.file.".config/kitty/kitty.conf".text = ''
 # vim:ft=kitty
 
 #zshell
 shell zsh
+
+#theme
+include ./theme.conf
 
 # Remove close window confirm
 confirm_os_window_close 0
@@ -19,11 +73,13 @@ bold_italic_font jetbrains mono nerd font
 font_size 12.0
 
 # Window padding
-window_padding_width 10
+window_padding_width 8
+
+background_opacity 0.90
 
 # The basic colors
-foreground              #CDD6F4
-background              #1E1E2E
+#foreground              #CDD6F4
+#background              #1E1E2E
 selection_foreground    #1E1E2E
 selection_background    #F5E0DC
 

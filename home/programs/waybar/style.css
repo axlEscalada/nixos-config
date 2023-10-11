@@ -65,6 +65,7 @@
                  color: #7ebae4;
                }
          #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
+		 background-color: #42454a;
                  padding-left: 10px;
                  padding-right: 10px;
                }

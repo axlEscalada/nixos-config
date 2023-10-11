@@ -2,7 +2,7 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, programs, ... }:
+{ config, pkgs, programs, musnix, ... }:
 
 {
   imports =
@@ -13,8 +13,13 @@
   # Bootloader.
   boot.loader.grub.enable = true;
   #boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.devices = [ "nodev" ];
-  boot.loader.grub.useOSProber = true;
+  boot.loader.grub.device = "nodev";
+  #boot.loader.grub.useOSProber = true;
+  boot.loader.grub.extraEntries = ''
+    menuentry "Windows 11" {
+      chainloader(hd0,0)
+    }
+  '';
 
   #GPU
   services.xserver.enable = true;
@@ -62,6 +67,7 @@
     packages = with pkgs; [];
   };
 
+  users.extraUsers.axl.extraGroups = [ "jackaudio" ];
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -79,25 +85,37 @@
     dunst
     neovim
     kitty
-    zsh
+    #zsh
     alacritty
    # wezterm
     libnotify
     #rofi-wayland
     firefox
-    slack
+    slack 
+    pulseaudio
+    pamixer
   ];
 
-  sound.enable = true;
+  hardware.pulseaudio.enable = false;
+  services.pipewire = {
+    enable = true;
+    alsa.enable = true;
+    alsa.support32Bit = true;
+    pulse.enable = true;
+    jack.enable = true;
+  };
   security.rtkit.enable = true;
 
-  services.pipewire = {
-   enable = true;
-   alsa.enable = true;
-   alsa.support32Bit = true;
-   pulse.enable = true;
-   jack.enable = true;
-  };
+  #sound.enable = true;
+  #security.rtkit.enable = true;
+
+  #services.pipewire = {
+  # enable = true;
+  # alsa.enable = true;
+  # alsa.support32Bit = true;
+  # pulse.enable = true;
+   #jack.enable = true;
+  #};
 
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.

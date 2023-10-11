@@ -34,5 +34,9 @@
 	# Rofi
 	export PATH=$HOME/.config/rofi/scripts:$PATH
 	export PATH=$PATH:~/Apps
+
+	# Pipewire
+	export SDL_AUDIODRIVER=pipewire
+	export ALSOFT_DRIVERS=pipewire
     '';
 }
