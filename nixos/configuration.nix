@@ -85,6 +85,7 @@
     dunst
     neovim
     kitty
+    neofetch
     #zsh
     alacritty
    # wezterm

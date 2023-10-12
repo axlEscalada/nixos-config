@@ -11,7 +11,15 @@ return {
 	-- OpenGL for GPU acceleration, Software for CPU
 	front_end = "OpenGL",
 
-	color_scheme = 'Catppuccin Mocha',
+	-- Shell integration
+	default_prog = {'zsh'},
+
+	-- Appearance
+	color_scheme = 'Rosé Pine (base16)',
+
+	colors = {
+		background = '#050505',
+	},
 
 	-- Font config
 	font = font_with_fallback(font_name),

@@ -1,0 +1,72 @@
+[[language]]
+name = "rust"
+
+# If this doesn't work, you might be on a older release version which handles this differently.
+# Try using [language.config.check] instead of [language-server.rust-analyzer.config.check]
+[language-server.rust-analyzer.config.check]
+command = "clippy"
+
+[[language]]
+name = "toml"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+
+[[language]]
+name = "java"
+scope = "source.java"
+injection-regex = "java"
+file-types = ["java", "jav"]
+roots = ["pom.xml", "build.gradle", "build.gradle.kts"]
+language-server = { command = "jdtls", args = ["-configuration", "~/.cache/jdtls"] }
+indent = { tab-width = 2, unit = "  " }
+
+[[grammar]]
+name = "java"
+source = { git = "https://github.com/tree-sitter/tree-sitter-java", rev = "09d650def6cdf7f479f4b78f595e9ef5b58ce31e" }
+
+[[language]]
+name = "zig"
+scope = "source.zig"
+injection-regex = "zig"
+file-types = ["zig"]
+roots = ["build.zig"]
+auto-format = true
+comment-token = "//"
+language-server = { command = "zls", args = [] }
+indent = { tab-width = 4, unit = "    " }
+formatter = { command = "zig" , args = ["fmt", "--stdin"] }
+
+[language.debugger]
+command = "codelldb"
+name = "codelldb"
+port-arg = "--port {}"
+transport = "tcp"
+
+[[language.debugger.templates]]
+name = "binary lldb"
+request = "launch"
+completion = [ { name = "binary", completion = "filename" }, { name = "args", completion = "args" } ]
+args = { runInTerminal = true, program = "{0}", args = ["{1}"] }
+
+[[language.debugger.templates]]
+name = "bun-install"
+request = "launch"
+
+[[language.debugger.templates.completion]]
+completion = "filename"
+name = "binary"
+
+[language.debugger.templates.args]
+program = "{0}"
+runInTerminal = true
+args = ["install", "cowsay"]
+
+[[language.debugger.templates]]
+name = "binary with args"
+request = "launch"
+completion = [ { name = "binary", completion = "filename" }, { name = "args", completion = "args" } ]
+args = { program = "{0}", runInTerminal = true, args = ["{1}"]}
+
+[[grammar]]
+name = "zig"
+source = { git = "https://github.com/maxxnino/tree-sitter-zig", rev = "0d08703e4c3f426ec61695d7617415fff97029bd" }
+

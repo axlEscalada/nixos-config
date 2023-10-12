@@ -64,8 +64,13 @@
                  padding-right: 6px;
                  color: #7ebae4;
                }
+	 .modules-right {
+		 background-color: rgba(22, 23, 23, 0.9);
+	 }
+         #clock, #temperature, #custom-wall, #temperature, #backlight, #battery, #custom-cava-internal {
+		 background-color: rgba(22, 23, 23, 0.9);
+	 }
          #mode, #clock, #memory, #temperature,#cpu,#mpd, #custom-wall, #temperature, #backlight, #pulseaudio, #network, #battery, #custom-powermenu, #custom-cava-internal {
-		 background-color: #42454a;
                  padding-left: 10px;
                  padding-right: 10px;
                }

@@ -70,12 +70,12 @@ bold_font        jetbrains mono nerd font
 italic_font      jetbrains mono nerd font
 bold_italic_font jetbrains mono nerd font
 
-font_size 12.0
+font_size 10.0
 
 # Window padding
 window_padding_width 8
 
-background_opacity 0.90
+background_opacity 0.8
 
 # The basic colors
 #foreground              #CDD6F4

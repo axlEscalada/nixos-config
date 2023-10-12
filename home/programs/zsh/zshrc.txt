@@ -13,14 +13,14 @@ JAVA_HOME=/usr/lib/jvm/java-11-openjdk-amd64
 export JAVA_HOME
 export PATH=$PATH:$JAVA_HOME
 
-ZSH_THEME="refined"
+#ZSH_THEME="refined"
 REFINED_CHAR_SYMBOL="⚡"
 
 # Rofi
 export PATH=$HOME/.config/rofi/scripts:$PATH
 
 source $ZSH_CUSTOM/plugins/zsh-autosuggestions/zsh-autosuggestions.zsh
-source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
+#source $ZSH_CUSTOM/plugins/zsh-syntax-highlighting/zsh-syntax-highlighting.zsh
 
 source $ZSH/oh-my-zsh.sh
 
