@@ -1,3 +1,4 @@
+
 {
   imports = [
     ./alacritty
@@ -5,6 +6,7 @@
     ./helix
     ./hypr
     ./kitty
+    ./nvim
     ./rofi
     ./tmux
     ./waybar

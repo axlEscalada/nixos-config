@@ -15,7 +15,13 @@ return {
 	default_prog = {'zsh'},
 
 	-- Appearance
-	color_scheme = 'Rosé Pine (base16)',
+	--color_scheme = 'Deafened (terminal.sexy)',
+  --color_scheme = 'dawnfox',
+	color_scheme = 'Rosé Pine Dawn (base16)',
+	--color_scheme = 'JWR dark (terminal.sexy)',
+	--color_scheme = 'Fairy Floss (Gogh)',
+	--color_scheme = 'Rosé Pine (base16)',
+	--color_scheme = 'rose-pine',
 
 	colors = {
 		background = '#050505',

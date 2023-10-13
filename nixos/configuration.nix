@@ -80,10 +80,11 @@
   };
 
   environment.systemPackages = with pkgs; [
+    zls
     waybar
     eww
     dunst
-    neovim
+    #neovim
     kitty
     neofetch
     #zsh

@@ -1,4 +1,8 @@
-{ hyprland, pkgs, inputs, ...}: {
+{ hyprland, pkgs, inputs, ...}: 
+let
+  nvchad = with pkgs; callPackage ../derivations/nvchad.nix { };
+in
+{
 
   imports = [
     hyprland.homeManagerModules.default
@@ -17,6 +21,7 @@
     #lang
     zigpkgs.master
     
+    nvchad
     #User Apps
     celluloid
     discord
@@ -27,6 +32,7 @@
     lutris
     openrgb
     betterdiscord-installer
+    neovim-unwrapped
 
     #utils
     ripgrep
@@ -44,7 +50,6 @@
 
     #misc 
     cava
-    neovim
     nano
     rofi
     nitch
