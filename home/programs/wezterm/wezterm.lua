@@ -1,5 +1,5 @@
 local wezterm = require("wezterm")
-
+local act = wezterm.action
 local function font_with_fallback(name, params)
 	local names = { name, "Apple Color Emoji", "azuki_font" }
 	return wezterm.font_with_fallback(names, params)
@@ -151,6 +151,27 @@ return {
 			mods = "CTRL|SHIFT",
 			action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }),
 		},
+		--TMUX
+		{ key = "1", mods = "ALT",  action= act.SendString '\x021'},
+		{ key = "2", mods = "ALT",  action= act.SendString '\x022'},
+		{ key = "3", mods = "ALT",  action= act.SendString '\x023'},
+		{ key = "4", mods = "ALT",  action= act.SendString '\x024'},
+		{ key = "5", mods = "ALT",  action= act.SendString '\x025'},
+		{ key = "6", mods = "ALT",  action= act.SendString '\x026'},
+		{ key = "7", mods = "ALT",  action= act.SendString '\x027'},
+		{ key = "8", mods = "ALT",  action= act.SendString '\x028'},
+		{ key = "9", mods = "ALT",  action= act.SendString '\x029'},
+		{ key = "0", mods = "ALT",  action= act.SendString '\x020'},
+
+		{ key = "t", mods = "ALT", action = act.SendString '\x02t'}, 
+		{ key = "w", mods = "ALT", action = act.SendString '\x02w'}, 
+		{ key = "e", mods = "ALT", action = act.SendString '\x02%'},
+		{ key = "e", mods = "ALT|SHIFT", action = act.SendString '\x02"'},
+		{ key = "LeftArrow", mods = "ALT|SHIFT", action = act.SendString  '\x02l'},
+		{ key = "RightArrow", mods = "ALT|SHIFT", action = act.SendString '\x02h'},
+		{ key = "UpArrow", mods = "ALT|SHIFT", action = act.SendString '\x02k'},
+		{ key = "DownArrow", mods = "ALT|SHIFT", action = act.SendString '\x02j'}
+
 	},
 
 	-- Aesthetic Night Colorscheme

@@ -21,7 +21,7 @@ in
     #lang
     zigpkgs.master
     
-    nvchad
+    #nvchad
     #User Apps
     celluloid
     discord
