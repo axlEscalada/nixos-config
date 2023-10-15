@@ -1,12 +1,16 @@
 { config, lib, pkgs, ... }:
-
+let
+    eww = "${pkgs.eww-wayland}/bin/eww";
+    idle = "${pkgs.swayidle}/bin/swayidle";
+    lock = "${pkgs.swaylock}/bin/swaylock";
+in
 {
   imports = [ 
-    ./hyprland-environment.nix
+    ./hyprland-environment.nix 
   ];
 
   home.packages = with pkgs; [ 
-    waybar
+    #waybar
     swww
   ];
   
@@ -17,9 +21,10 @@
     #nvidiaPatches = true;
     extraConfig = ''
 
+    $scriptsDir = $HOME/.config/hypr/scripts
     # Monitor
-    monitor=DP-3,1920x1080,1920x0,1
-    monitor=HDMI-A-1,1920x1080,0x0,1
+    monitor=DP-3,1920x1080,1920x0,1,bitdepth,10
+    monitor=HDMI-A-1,1920x1080,0x0,1,bitdepth,10
 
     # Fix slow startup
     exec systemctl --user import-environment WAYLAND_DISPLAY XDG_CURRENT_DESKTOP
@@ -32,8 +37,15 @@
 
     source = /home/axl/.config/hypr/colors
     exec = pkill waybar & sleep 0.5 && waybar
+    exec-once = ${eww} daemon
     exec-once = swww init
     exec-once = swww img /home/axl/Imagens/wallpapers/no.gif
+    # Auto lock
+    exec ${idle} -w \
+      timeout 120 '${lock} -f' \
+      timeout 180 'swaymsg "output * dpms off"' \
+        resume 'swaymsg "output * dpms on"' \
+      before-sleep '${lock} -f'
 
     # Set en layout at startup
 
@@ -58,7 +70,7 @@
 
         gaps_in = 5
         gaps_out = 20
-        border_size = 2
+        border_size = 1
         col.active_border = rgba(47278cee) rgba(cf76c9ee) 45deg
         col.inactive_border = rgba(595959aa)
 
@@ -68,12 +80,12 @@
     decoration {
 
         rounding = 5
-	blur {
-         enabled = true
-         size = 3
-         passes = 1
-         new_optimizations = true
-	}
+        blur {
+            enabled = true
+            size = 3
+            passes = 1
+            new_optimizations = true
+        }
 
         drop_shadow = true
         shadow_range = 4
@@ -143,6 +155,9 @@
     # Switch Keyboard Layouts
     bind = $mainMod, SPACE, exec, hyprctl switchxkblayout teclado-gamer-husky-blizzard next
 
+    # Switch blur
+    bind = ALT, g, exec, $scriptsDir/glassmorphismToggle
+
     bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
     bind = SHIFT, Print, exec, grim -g "$(slurp)"
 
@@ -201,25 +216,25 @@
         '';
   };
 
-      home.file.".config/hypr/colors".text = ''
-	$background = rgba(1d192bee)
-	$foreground = rgba(c3dde7ee)
+  home.file.".config/hypr/colors".text = ''
+    	$background = rgba(1d192bee)
+    	$foreground = rgba(c3dde7ee)
 
-	$color0 = rgba(1d192bee)
-	$color1 = rgba(465EA7ee)
-	$color2 = rgba(5A89B6ee)
-	$color3 = rgba(6296CAee)
-	$color4 = rgba(73B3D4ee)
-	$color5 = rgba(7BC7DDee)
-	$color6 = rgba(9CB4E3ee)
-	$color7 = rgba(c3dde7ee)
-	$color8 = rgba(889aa1ee)
-	$color9 = rgba(465EA7ee)
-	$color10 = rgba(5A89B6ee)
-	$color11 = rgba(6296CAee)
-	$color12 = rgba(73B3D4ee)
-	$color13 = rgba(7BC7DDee)
-	$color14 = rgba(9CB4E3ee)
-	$color15 = rgba(c3dde7ee)
-      '';
+    	$color0 = rgba(1d192bee)
+    	$color1 = rgba(465EA7ee)
+    	$color2 = rgba(5A89B6ee)
+    	$color3 = rgba(6296CAee)
+    	$color4 = rgba(73B3D4ee)
+    	$color5 = rgba(7BC7DDee)
+    	$color6 = rgba(9CB4E3ee)
+    	$color7 = rgba(c3dde7ee)
+    	$color8 = rgba(889aa1ee)
+    	$color9 = rgba(465EA7ee)
+    	$color10 = rgba(5A89B6ee)
+    	$color11 = rgba(6296CAee)
+    	$color12 = rgba(73B3D4ee)
+    	$color13 = rgba(7BC7DDee)
+    	$color14 = rgba(9CB4E3ee)
+    	$color15 = rgba(c3dde7ee)
+  '';
 }

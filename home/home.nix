@@ -1,9 +1,12 @@
-{ hyprland, pkgs, inputs, ...}: 
+{ hyprland, zls-flake, pkgs,  ...}: 
 let
   nvchad = with pkgs; callPackage ../derivations/nvchad.nix { };
+  #zlsg = import (builtins.fetchTarball {
+  #  url = "https://github.com/zigtools/zls/archive/master.tar.gz";
+  #  sha256 = "1jzvr7m756jrnsyf2zpyv2xjr0f3i6kdhqbpbrcrz5dxskr1z6jw";
+  #}) {};
 in
 {
-
   imports = [
     hyprland.homeManagerModules.default
     #./environment
@@ -19,6 +22,7 @@ in
 
   home.packages = (with pkgs; [
     #lang
+    zls-flake.packages.${pkgs.system}.zls
     zigpkgs.master
     
     #nvchad
@@ -33,6 +37,8 @@ in
     openrgb
     betterdiscord-installer
     neovim-unwrapped
+    brave
+    google-chrome
 
     #utils
     ripgrep

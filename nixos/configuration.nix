@@ -80,8 +80,8 @@
   };
 
   environment.systemPackages = with pkgs; [
-    zls
-    waybar
+    #zls
+    #waybar
     eww
     dunst
     #neovim
