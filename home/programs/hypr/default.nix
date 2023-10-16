@@ -39,7 +39,7 @@ in
     exec = pkill waybar & sleep 0.5 && waybar
     exec-once = ${eww} daemon
     exec-once = swww init
-    exec-once = swww img /home/axl/Imagens/wallpapers/no.gif
+    exec-once = swww img $HOME/Images/wallpapers/wallpaper.png
     # Auto lock
     exec ${idle} -w \
       timeout 120 '${lock} -f' \
@@ -67,10 +67,9 @@ in
     }
 
     general {
-
         gaps_in = 5
         gaps_out = 20
-        border_size = 1
+        border_size = 0
         col.active_border = rgba(47278cee) rgba(cf76c9ee) 45deg
         col.inactive_border = rgba(595959aa)
 
@@ -78,12 +77,11 @@ in
     }
 
     decoration {
-
-        rounding = 5
+        rounding = 8
         blur {
             enabled = true
-            size = 3
-            passes = 1
+            size = 7.3
+            passes = 2
             new_optimizations = true
         }
 

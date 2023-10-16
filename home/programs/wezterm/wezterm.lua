@@ -178,10 +178,10 @@ return {
 	bold_brightens_ansi_colors = true,
 	-- Padding
 	window_padding = {
-		left = 25,
-		right = 25,
-		top = 25,
-		bottom = 25,
+		left = 20,
+		right = 20,
+		top = 20,
+		bottom = 10,
 	},
 
 	-- Tab Bar
