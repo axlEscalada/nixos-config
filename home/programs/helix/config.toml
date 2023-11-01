@@ -23,9 +23,6 @@ f = "file_picker"
 F = "file_picker_in_current_directory"
 b = "buffer_picker"
 
-[keys.normal.r]
-n = "rename_symbol"
-
 [keys.normal."]"]
 c = "goto_next_change"
 C = "goto_last_change"

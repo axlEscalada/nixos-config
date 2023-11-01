@@ -66,7 +66,7 @@ in {
     settings.mainBar = {
       position = "top";
       layer = "top";
-      height = 20;
+      height = 30;
       margin-top = 0;
       margin-bottom = 0;
       margin-left = 0;
@@ -122,7 +122,7 @@ in {
         lower_cutoff_freq = 50;
         higher_cutoff_freq = 10000;
         method = "pipewire";
-        source = "auto";
+        source = "alsa_input.pci-0000_0b_00.4.analog-stereo";
         stereo = true;
         reverse = false;
         bar_delimiter = 0;
@@ -147,7 +147,7 @@ in {
         lower_cutoff_freq = 50;
         higher_cutoff_freq = 10000;
         method = "pipewire";
-        source = "auto";
+        source = "alsa_input.pci-0000_0b_00.4.analog-stereo";
         stereo = true;
         reverse = false;
         bar_delimiter = 0;
@@ -370,7 +370,7 @@ in {
           border-radius: 0px 0px 20px 0px;
           margin: 0px;
           padding: 0px 35px 0px 15px;
-          font-size: 20px;
+          font-size: 15px;
       }
 
       #custom-playerctl.backward, #custom-playerctl.play, #custom-playerctl.foward {

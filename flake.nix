@@ -9,6 +9,8 @@
       url = github:zigtools/zls;
       inputs.nixpkgs.follows = "nixpkgs";
     };
+    language-servers.url = git+https://git.sr.ht/~bwolf/language-servers.nix;
+    language-servers.inputs.nixpkgs.follows = "nixpkgs";
     home-manager = {
      url = "github:nix-community/home-manager";
      inputs.nixpkgs.follows = "nixpkgs";
@@ -16,7 +18,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, zig, musnix, zls-flake, ...}: 
+  outputs = { self, nixpkgs, home-manager, hyprland, zig, musnix, zls-flake, language-servers, ...}: 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {
@@ -29,7 +31,7 @@
   nixosConfigurations = {
     axl = lib.nixosSystem rec {
         inherit system;
-        specialArgs = { inherit hyprland zls-flake; };
+        specialArgs = { inherit hyprland zls-flake language-servers; };
         modules = [ 
           ./nixos/configuration.nix
           hyprland.nixosModules.default

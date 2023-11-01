@@ -16,7 +16,21 @@ scope = "source.java"
 injection-regex = "java"
 file-types = ["java", "jav"]
 roots = ["pom.xml", "build.gradle", "build.gradle.kts"]
-language-server = { command = "jdtls", args = ["-configuration", "~/.cache/jdtls"] }
+# language-server = { command = "jdtls", args = ["-configuration", "~/.cache/jdtls"] }
+language-server = { command = "jdtls", args =[ 
+    "java", 
+    "-Declipse.application=org.eclipse.jdt.ls.core.id1",
+    "-Dosgi.bundles.defaultStartLevel=4",
+    "-Declipse.product=org.eclipse.jdt.ls.core.product",
+    "-Dlog.protocol=true",
+    "-Dlog.level=ALL",
+    "-Xms1g",
+    "--add-modules=ALL-SYSTEM",
+    "--add-opens java.base/java.util=ALL-UNNAMED",
+    "--add-opens java.base/java.lang=ALL-UNNAMED",
+    "-jar  /home/axl/.cache/jdtls_install/plugins/org.eclipse.equinox.launcher_1.14.0-202207211651.jar",
+    "-configuration /home/axl/.cache/jdtls_install/config_linux"
+    ] }
 indent = { tab-width = 2, unit = "  " }
 
 [[grammar]]

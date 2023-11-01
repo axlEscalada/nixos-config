@@ -98,7 +98,6 @@
     pamixer
   ];
 
-  hardware.pulseaudio.enable = false;
   services.pipewire = {
     enable = true;
     alsa.enable = true;
@@ -107,18 +106,18 @@
     jack.enable = true;
   };
   security.rtkit.enable = true;
+  services.blueman.enable = true;
 
-  #sound.enable = true;
-  #security.rtkit.enable = true;
+  #FLATPACK
+  services.flatpak.enable = true;
 
-  #services.pipewire = {
-  # enable = true;
-  # alsa.enable = true;
-  # alsa.support32Bit = true;
-  # pulse.enable = true;
-   #jack.enable = true;
-  #};
-
+  #Enable headset buttons control media player
+  systemd.user.services.mpris-proxy = {
+      description = "Mpris proxy";
+      after = [ "network.target" "sound.target" ];
+      wantedBy = [ "default.target" ];
+      serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+  };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
   # programs.mtr.enable = true;

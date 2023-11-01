@@ -34,6 +34,21 @@
     },
     "flake-utils": {
       "locked": {
+        "lastModified": 1656928814,
+        "narHash": "sha256-RIFfgBuKz6Hp89yRr7+NR5tzIAbn52h8vT6vXkYjZoM=",
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "rev": "7e2a3b3dfd9af950a856d66b0a7d01e3c18aa249",
+        "type": "github"
+      },
+      "original": {
+        "owner": "numtide",
+        "repo": "flake-utils",
+        "type": "github"
+      }
+    },
+    "flake-utils_2": {
+      "locked": {
         "lastModified": 1659877975,
         "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
         "owner": "numtide",
@@ -47,7 +62,7 @@
         "type": "github"
       }
     },
-    "flake-utils_2": {
+    "flake-utils_3": {
       "inputs": {
         "systems": "systems_2"
       },
@@ -65,7 +80,7 @@
         "type": "github"
       }
     },
-    "flake-utils_3": {
+    "flake-utils_4": {
       "locked": {
         "lastModified": 1659877975,
         "narHash": "sha256-zllb8aq3YO3h8B/U0/J1WBgAL8EX5yWf5pMj3G0NAmc=",
@@ -180,6 +195,27 @@
         "url": "https://raw.githubusercontent.com/ziglang/zig/63bd2bff12992aef0ce23ae4b344e9cb5d65f05d/doc/langref.html.in"
       }
     },
+    "language-servers": {
+      "inputs": {
+        "flake-utils": "flake-utils",
+        "nixpkgs": [
+          "nixpkgs"
+        ]
+      },
+      "locked": {
+        "lastModified": 1697563957,
+        "narHash": "sha256-IHrKeY2W39HPHywPv7MzuA4ictiKAJ91bBZGIQUDhLM=",
+        "ref": "refs/heads/master",
+        "rev": "a0e3f64fbe19e351510a2bf071f37f7003241e07",
+        "revCount": 10,
+        "type": "git",
+        "url": "https://git.sr.ht/~bwolf/language-servers.nix"
+      },
+      "original": {
+        "type": "git",
+        "url": "https://git.sr.ht/~bwolf/language-servers.nix"
+      }
+    },
     "musnix": {
       "inputs": {
         "nixpkgs": "nixpkgs_2"
@@ -266,6 +302,7 @@
       "inputs": {
         "home-manager": "home-manager",
         "hyprland": "hyprland",
+        "language-servers": "language-servers",
         "musnix": "musnix",
         "nixpkgs": "nixpkgs_3",
         "zig": "zig",
@@ -353,7 +390,7 @@
     "zig": {
       "inputs": {
         "flake-compat": "flake-compat",
-        "flake-utils": "flake-utils",
+        "flake-utils": "flake-utils_2",
         "nixpkgs": "nixpkgs_4"
       },
       "locked": {
@@ -373,7 +410,7 @@
     "zig-overlay": {
       "inputs": {
         "flake-compat": "flake-compat_2",
-        "flake-utils": "flake-utils_3",
+        "flake-utils": "flake-utils_4",
         "nixpkgs": [
           "zls-flake",
           "nixpkgs"
@@ -395,7 +432,7 @@
     },
     "zls-flake": {
       "inputs": {
-        "flake-utils": "flake-utils_2",
+        "flake-utils": "flake-utils_3",
         "gitignore": "gitignore",
         "langref": "langref",
         "nixpkgs": [

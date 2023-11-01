@@ -1,4 +1,4 @@
-{ hyprland, zls-flake, pkgs,  ...}: 
+{ hyprland, zls-flake, pkgs, language-servers, ...}: 
 let
   nvchad = with pkgs; callPackage ../derivations/nvchad.nix { };
   #zlsg = import (builtins.fetchTarball {
@@ -24,6 +24,10 @@ in
     #lang
     zls-flake.packages.${pkgs.system}.zls
     zigpkgs.master
+    jdk17
+    language-servers.packages.${pkgs.system}.jdt-language-server
+    maven
+    nodejs
     
     #nvchad
     #User Apps
@@ -39,6 +43,8 @@ in
     neovim-unwrapped
     brave
     google-chrome
+    kooha#screerecorder
+    recapp#screenrecorder
 
     #utils
     ripgrep
@@ -60,14 +66,19 @@ in
     rofi
     nitch
     wget
-    grim
-    slurp
+    grim#screenshot
+    slurp#screenposition
     wl-clipboard
     pamixer
     mpc-cli
     tty-clock
     eza
     btop
+
+    #bluetooth
+    bluedevil
+    bluez
+    # bluez-qt
 
   ]) ++ (with pkgs.gnome; [ 
     nautilus

@@ -23,7 +23,7 @@ in
 
     $scriptsDir = $HOME/.config/hypr/scripts
     # Monitor
-    monitor=DP-3,1920x1080,1920x0,1,bitdepth,10
+    monitor=DP-3,1920x1080@144,1920x0,1,bitdepth,10
     monitor=HDMI-A-1,1920x1080,0x0,1,bitdepth,10
 
     # Fix slow startup
@@ -156,8 +156,9 @@ in
     # Switch blur
     bind = ALT, g, exec, $scriptsDir/glassmorphismToggle
 
-    bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
-    bind = SHIFT, Print, exec, grim -g "$(slurp)"
+    # bind = , Print, exec, grim -g "$(slurp)" - | wl-copy
+    bind = SHIFT ALT, 4, exec, grim -g "$(slurp)" - | wl-copy
+    bind = SHIFT ALT, 3, exec, grim -g "$(slurp)"
 
     # Functional keybinds
     bind =,XF86AudioMicMute,exec,pamixer --default-source -t

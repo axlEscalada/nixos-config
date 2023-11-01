@@ -21,6 +21,9 @@
     	set-option -g renumber-windows on
 
       set-option -g default-shell ${pkgs.zsh}/bin/zsh
+      # Set status bar and message style to empty (no color)
+      set -g status-style ""
+      set -g message-style ""
 
     	bind-key C-b send-prefix
 
