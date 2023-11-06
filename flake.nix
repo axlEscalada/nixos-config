@@ -16,10 +16,9 @@
      inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "github:hyprwm/Hyprland";
-    mypkgs.url = "./derivations";
   };
 
-  outputs = { self, nixpkgs, home-manager, hyprland, zig, musnix, zls-flake, language-servers, mypkgs, ...}: 
+  outputs = { self, nixpkgs, home-manager, hyprland, zig, musnix, zls-flake, language-servers, ...}: 
   let
     system = "x86_64-linux";
     pkgs = import nixpkgs {

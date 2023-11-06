@@ -5,7 +5,8 @@ local function font_with_fallback(name, params)
 	return wezterm.font_with_fallback(names, params)
 end
 
-local font_name = "JetBrainsMonoNL NF"
+-- local font_name = "JetBrainsMonoNL NF"
+local font_name = "CommitMono-Regular";
 
 return {
 	-- OpenGL for GPU acceleration, Software for CPU
@@ -30,10 +31,10 @@ return {
 	-- Font config
 	font = font_with_fallback(font_name),
 	font_rules = {
-		{
-			italic = true,
-			font = font_with_fallback(font_name, { italic = true }),
-		},
+		-- {
+			-- italic = true,
+			-- font = font_with_fallback(font_name, { italic = true }),
+		-- },
 		{
 			italic = false,
 			font = font_with_fallback(font_name, { bold = true }),
@@ -45,7 +46,8 @@ return {
 	},
 	warn_about_missing_glyphs = false,
 	font_size = 10,
-	line_height = 1.0,
+	line_height = 1.2,
+	cell_width = 0.9,
 	dpi = 96.0,
 
 	-- Cursor style

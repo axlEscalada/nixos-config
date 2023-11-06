@@ -2,8 +2,13 @@
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
 
-{ config, pkgs, programs, musnix, mypkgs, ... }:
-
+{ config, pkgs, programs, musnix, lib, ... }:
+# let
+  # commit-font = import ../derivations/fonts.nix {
+    # inherit lib;
+    # fetchzip = pkgs.fetchzip;
+  # };
+# in
 {
   imports =
     [ # Include the results of the xhardware scan.
@@ -96,7 +101,6 @@
     slack 
     pulseaudio
     pamixer
-    mypkgs.fonts
   ];
 
   services.pipewire = {
@@ -155,4 +159,9 @@
   system.stateVersion = "23.05"; # Did you read the comment?
 
   programs.hyprland.enable = true;
+
+  fonts.fontDir.enable = true;
+  fonts.packages= with pkgs; [
+    commit-mono
+  ];
 }
