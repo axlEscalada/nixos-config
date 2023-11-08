@@ -16,16 +16,28 @@
     ];
 
   # Bootloader.
-  boot.loader.grub.enable = true;
-  #boot.loader.grub.device = "/dev/sda";
-  boot.loader.grub.device = "nodev";
-  #boot.loader.grub.useOSProber = true;
-  boot.loader.grub.extraEntries = ''
-    menuentry "Windows 11" {
-      chainloader(hd0,0)
-    }
-  '';
-
+  boot.loader = {
+    systemd-boot.enable = false;
+    efi = {
+      canTouchEfiVariables = true;
+      # assuming /boot is the mount point of the  EFI partition in NixOS (as the installation section recommends).
+      efiSysMountPoint = "/boot";
+    };
+    grub = {
+      # despite what the configuration.nix manpage seems to indicate,
+      # as of release 17.09, setting device to "nodev" will still call
+      # `grub-install` if efiSupport is true
+      # (the devices list is not used by the EFI grub install,
+      # but must be set to some value in order to pass an assert in grub.nix)
+      devices = [ "nodev" ];
+      efiSupport = true;
+      enable = true;
+      version = 2;
+      useOSProber = true;
+      fontSize = 35;
+      timeout = 5;
+    };
+  };
   #GPU
   services.xserver.enable = true;
   services.xserver.videoDrivers = [ "amdgpu" ];
@@ -112,7 +124,11 @@
   };
   security.rtkit.enable = true;
   services.blueman.enable = true;
-
+  security.pam.services.swaylock = {
+    text = ''
+      auth include login
+    '';
+  };
   #FLATPACK
   services.flatpak.enable = true;
 
