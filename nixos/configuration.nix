@@ -72,7 +72,9 @@
 
   # Configure keymap in X11
   services.xserver = {
-    layout = "us";
+    exportConfiguration = true;
+    layout = "us,es";
+    xkbOptions = "eurosign:e, compose:menu, grp:alt_space_toggle";
     xkbVariant = "";
   };
 
@@ -113,6 +115,7 @@
     slack 
     pulseaudio
     pamixer
+    libreoffice-qt
   ];
 
   services.pipewire = {

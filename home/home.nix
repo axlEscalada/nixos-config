@@ -28,7 +28,11 @@ in
     language-servers.packages.${pkgs.system}.jdt-language-server
     maven
     nodejs
-    
+    rustc
+    cargo
+    python3
+    python3.pkgs.pip    
+
     #nvchad
     #User Apps
     celluloid
@@ -74,7 +78,7 @@ in
     tty-clock
     eza
     btop
-
+    
     #bluetooth
     bluedevil
     bluez
