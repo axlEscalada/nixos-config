@@ -82,11 +82,12 @@
   users.users.axl = {
     isNormalUser = true;
     description = "axl";
-    extraGroups = [ "networkmanager" "wheel" ];
+    extraGroups = [ "networkmanager" "wheel" "docker" ];
     packages = with pkgs; [];
   };
-
+  users.extraGroups.docker.members = [ "axl" ];
   users.extraUsers.axl.extraGroups = [ "jackaudio" ];
+
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
 
@@ -183,4 +184,11 @@
   fonts.packages= with pkgs; [
     commit-mono
   ];
+
+  #docker
+  virtualisation.docker.enable = true;
+  virtualisation.docker.rootless = {
+    enable = true;
+    setSocketVariable = true;
+  };
 }

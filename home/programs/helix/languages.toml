@@ -11,6 +11,10 @@ name = "toml"
 formatter = { command = "taplo", args = ["fmt", "-"] }
 
 [[language]]
+name = "go"
+formatter = { command = "taplo", args = ["fmt", "-"] }
+
+[[language]]
 name = "java"
 scope = "source.java"
 injection-regex = "java"

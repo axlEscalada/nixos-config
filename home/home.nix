@@ -32,6 +32,8 @@ in
     cargo
     python3
     python3.pkgs.pip    
+    go
+    gopls
 
     #nvchad
     #User Apps
@@ -63,6 +65,7 @@ in
     xflux
     dunst
     pavucontrol
+    awscli2
 
     #misc 
     cava

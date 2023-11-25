@@ -23,6 +23,7 @@ return {
 	--color_scheme = 'Fairy Floss (Gogh)',
 	--color_scheme = 'Rosé Pine (base16)',
 	--color_scheme = 'rose-pine',
+	-- color_scheme = 'Red Phoenix (terminal.sexy)',
 
 	colors = {
 		background = '#050505',
@@ -195,7 +196,7 @@ return {
 	-- General
 	automatically_reload_config = true,
 	inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 },
-	window_background_opacity = 0.5,
+	window_background_opacity = 0.6,
 	window_close_confirmation = "NeverPrompt",
   window_frame = { active_titlebar_bg = "#45475a", font = font_with_fallback(font_name, { bold = true }) },
 }
