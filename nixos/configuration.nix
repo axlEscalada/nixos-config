@@ -1,19 +1,25 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-
-{ config, pkgs, programs, musnix, lib, ... }:
+{
+  config,
+  pkgs,
+  programs,
+  musnix,
+  lib,
+  ...
+}:
 # let
-  # commit-font = import ../derivations/fonts.nix {
-    # inherit lib;
-    # fetchzip = pkgs.fetchzip;
-  # };
+# commit-font = import ../derivations/fonts.nix {
+# inherit lib;
+# fetchzip = pkgs.fetchzip;
+# };
 # in
 {
-  imports =
-    [ # Include the results of the xhardware scan.
-      ./hardware-configuration.nix
-    ];
+  imports = [
+    # Include the results of the xhardware scan.
+    ./hardware-configuration.nix
+  ];
 
   # Bootloader.
   boot.loader = {
@@ -29,7 +35,7 @@
       # `grub-install` if efiSupport is true
       # (the devices list is not used by the EFI grub install,
       # but must be set to some value in order to pass an assert in grub.nix)
-      devices = [ "nodev" ];
+      devices = ["nodev"];
       efiSupport = true;
       enable = true;
       version = 2;
@@ -40,7 +46,7 @@
   };
   #GPU
   services.xserver.enable = true;
-  services.xserver.videoDrivers = [ "amdgpu" ];
+  services.xserver.videoDrivers = ["amdgpu"];
 
   services.transmission = {
     enable = true;
@@ -101,12 +107,12 @@
 
   networking = {
     hostName = "nixos"; # Define your hostname.
-  # Enable networking
+    # Enable networking
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [ 6881 ];
-      allowedUDPPorts = [ 6882 ];
+      allowedTCPPorts = [6881];
+      allowedUDPPorts = [6882];
     };
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -144,11 +150,11 @@
   users.users.axl = {
     isNormalUser = true;
     description = "axl";
-    extraGroups = [ "networkmanager" "wheel" "docker" ];
+    extraGroups = ["networkmanager" "wheel" "docker"];
     packages = with pkgs; [];
   };
-  users.extraGroups.docker.members = [ "axl" ];
-  users.extraUsers.axl.extraGroups = [ "jackaudio" ];
+  users.extraGroups.docker.members = ["axl"];
+  users.extraUsers.axl.extraGroups = ["jackaudio"];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -161,6 +167,8 @@
     NIXOS_OZONE_WL = "1";
   };
 
+  environment.homeBinInPath = true;
+
   environment.systemPackages = with pkgs; [
     #zls
     #waybar
@@ -171,11 +179,11 @@
     neofetch
     #zsh
     alacritty
-   # wezterm
+    # wezterm
     libnotify
     #rofi-wayland
     firefox
-    slack 
+    slack
     pulseaudio
     pamixer
     libreoffice-qt
@@ -200,10 +208,10 @@
 
   #Enable headset buttons control media player
   systemd.user.services.mpris-proxy = {
-      description = "Mpris proxy";
-      after = [ "network.target" "sound.target" ];
-      wantedBy = [ "default.target" ];
-      serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
+    description = "Mpris proxy";
+    after = ["network.target" "sound.target"];
+    wantedBy = ["default.target"];
+    serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
   # Some programs need SUID wrappers, can be configured further or are
   # started in user sessions.
@@ -219,7 +227,7 @@
   nix = {
     package = pkgs.nixFlakes;
     extraOptions = ''
-     experimental-features = nix-command flakes
+      experimental-features = nix-command flakes
     '';
   };
 
@@ -243,7 +251,7 @@
   programs.hyprland.enable = true;
 
   fonts.fontDir.enable = true;
-  fonts.packages= with pkgs; [
+  fonts.packages = with pkgs; [
     commit-mono
   ];
 

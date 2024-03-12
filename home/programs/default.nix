@@ -7,7 +7,6 @@
     ./helix
     ./hypr
     ./kitty
-    #./nvim
     ./rofi
     ./tmux
     ./waybar

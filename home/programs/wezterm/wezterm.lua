@@ -16,17 +16,13 @@ return {
 	default_prog = {'zsh'},
 
 	-- Appearance
-	--color_scheme = 'Deafened (terminal.sexy)',
-  --color_scheme = 'dawnfox',
 	color_scheme = 'Rosé Pine Dawn (base16)',
-	--color_scheme = 'JWR dark (terminal.sexy)',
-	--color_scheme = 'Fairy Floss (Gogh)',
-	--color_scheme = 'Rosé Pine (base16)',
-	--color_scheme = 'rose-pine',
-	-- color_scheme = 'Red Phoenix (terminal.sexy)',
+	-- color_scheme = 'oxocarbon',
+	-- color_scheme = 'Oxocarbon Dark (Gogh)',
 
 	colors = {
-		background = '#050505',
+		background = '#121212',
+		-- background = '#050505',
 	},
 
 	-- Font config
@@ -125,11 +121,6 @@ return {
 			action = wezterm.action({ SpawnTab = "CurrentPaneDomain" }),
 		},
 		{
-			key = "w",
-			mods = "CTRL",
-			action = wezterm.action({ CloseCurrentTab = { confirm = false } }),
-		},
-		{
 			key = "Tab",
 			mods = "CTRL",
 			action = wezterm.action({ ActivateTabRelative = 1 }),
@@ -196,7 +187,7 @@ return {
 	-- General
 	automatically_reload_config = true,
 	inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 },
-	window_background_opacity = 0.6,
+	-- window_background_opacity = 0.9,
 	window_close_confirmation = "NeverPrompt",
   window_frame = { active_titlebar_bg = "#45475a", font = font_with_fallback(font_name, { bold = true }) },
 }

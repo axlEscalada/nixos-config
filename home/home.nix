@@ -1,8 +1,13 @@
-{ hyprland, zls-flake, pkgs, language-servers, ...}: 
-let
-  nvchad = with pkgs; callPackage ../derivations/nvchad.nix { };
-in
 {
+  nixvim,
+  hyprland,
+  zls-flake,
+  pkgs,
+  language-servers,
+  ...
+}: let
+  nvchad = with pkgs; callPackage ../derivations/nvchad.nix {};
+in {
   imports = [
     hyprland.homeManagerModules.default
     ./programs
@@ -15,84 +20,86 @@ in
     homeDirectory = "/home/axl";
   };
 
-  home.packages = (with pkgs; [
-    #lang
-    zls-flake.packages.${pkgs.system}.zls
-    zigpkgs.master
-    jdk17
-    language-servers.packages.${pkgs.system}.jdt-language-server
-    maven
-    nodejs
-    rustc
-    cargo
-    python3
-    python3.pkgs.pip    
-    go
-    gopls
-    docker-compose
+  home.packages =
+    (with pkgs; [
+      #editor
+      nixvim.packages.${pkgs.system}.default
 
-    #nvchad
-    #User Apps
-    celluloid
-    discord
-    librewolf
-    bibata-cursors
-    vscode
-    lollypop
-    lutris
-    openrgb
-    betterdiscord-installer
-    neovim-unwrapped
-    brave
-    google-chrome
-    kooha#screerecorder
-    recapp#screenrecorder
-    ollama
-    gparted
-    # transmission-gtk
+      #lang
+      zls-flake.packages.${pkgs.system}.zls
+      # zigpkgs.master
+      jdk17
+      # language-servers.packages.${pkgs.system}.jdt-language-server
+      maven
+      nodejs
+      rustc
+      cargo
+      python3
+      python3.pkgs.pip
+      go
+      gopls
+      docker-compose
 
-    #utils
-    ripgrep
-    jq
-    ranger
-    wlr-randr
-    git
-    gnumake
-    catimg
-    curl
-    appimage-run
-    xflux
-    dunst
-    pavucontrol
-    awscli2
+      #nvchad
+      #User Apps
+      celluloid
+      discord
+      librewolf
+      bibata-cursors
+      vscode
+      lollypop
+      lutris
+      openrgb
+      betterdiscord-installer
+      brave
+      google-chrome
+      kooha #screerecorder
+      recapp #screenrecorder
+      ollama
+      gparted
 
-    #misc 
-    cava
-    nano
-    rofi
-    nitch
-    wget
-    grim#screenshot
-    slurp#screenposition
-    wl-clipboard
-    pamixer
-    mpc-cli
-    tty-clock
-    eza
-    btop
-    
-    #bluetooth
-    bluedevil
-    bluez
-    # bluez-qt
+      #utils
+      ripgrep
+      jq
+      ranger
+      wlr-randr
+      git
+      gnumake
+      catimg
+      curl
+      appimage-run
+      xflux
+      dunst
+      pavucontrol
+      awscli2
 
-  ]) ++ (with pkgs.gnome; [ 
-    nautilus
-    zenity
-    gnome-tweaks
-    eog
-    gedit
-  ]);
+      #misc
+      cava
+      nano
+      rofi
+      nitch
+      wget
+      grim #screenshot
+      slurp #screenposition
+      wl-clipboard
+      pamixer
+      mpc-cli
+      tty-clock
+      eza
+      btop
+
+      #bluetooth
+      bluedevil
+      bluez
+      # bluez-qt
+      gedit
+    ])
+    ++ (with pkgs.gnome; [
+      nautilus
+      zenity
+      gnome-tweaks
+      eog
+    ]);
 
   programs.home-manager.enable = true;
 
