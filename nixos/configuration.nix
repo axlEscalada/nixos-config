@@ -8,14 +8,9 @@
   musnix,
   lib,
   ...
-}:
-# let
-# commit-font = import ../derivations/fonts.nix {
-# inherit lib;
-# fetchzip = pkgs.fetchzip;
-# };
-# in
-{
+}: let
+  tokyo-night-sddm = pkgs.libsForQt5.callPackage ./tokyo-night-sddm/default.nix {};
+in {
   imports = [
     # Include the results of the xhardware scan.
     ./hardware-configuration.nix
@@ -47,6 +42,9 @@
   #GPU
   services.xserver.enable = true;
   services.xserver.videoDrivers = ["amdgpu"];
+  services.xserver.displayManager.sddm.enable = true;
+  services.xserver.displayManager.sddm.wayland.enable = true;
+  services.xserver.displayManager.sddm.theme = "tokyo-night-sddm";
 
   services.transmission = {
     enable = true;
@@ -170,23 +168,18 @@
   environment.homeBinInPath = true;
 
   environment.systemPackages = with pkgs; [
-    #zls
-    #waybar
+    tokyo-night-sddm
     eww
     dunst
-    #neovim
     kitty
     neofetch
-    #zsh
-    alacritty
-    # wezterm
     libnotify
-    #rofi-wayland
     firefox
     slack
     pulseaudio
     pamixer
     libreoffice-qt
+    killall
   ];
 
   services.pipewire = {
@@ -253,6 +246,8 @@
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [
     commit-mono
+    font-awesome
+    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
   ];
 
   #docker

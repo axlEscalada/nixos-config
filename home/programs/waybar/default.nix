@@ -1,10 +1,7 @@
-{
-  pkgs,
-  ...
-}: let
+{pkgs, ...}: let
   opacity = "0";
   palette = {
-    font = "RobotoMono Nerd Font";
+    font = "FiraCode";
     fontsize = "12";
     primary_accent = "cba6f7";
     secondary_accent = "89b4fa";
@@ -84,15 +81,14 @@ in {
         "hyprland/workspaces"
         "cava#right"
       ];
-      modules-right =
-        [
-          "tray"
-          "cpu"
-          "memory"
-          "pulseaudio"
-          "network"
-          "clock"
-        ];
+      modules-right = [
+        "tray"
+        "cpu"
+        "memory"
+        "pulseaudio"
+        "network"
+        "clock"
+      ];
       clock = {
         format = " {:%a, %d %b, %I:%M %p}";
         tooltip = "true";
@@ -282,7 +278,7 @@ in {
       };
       "custom/launcher" = {
         format = "";
-        on-click = "${eww} open-many --toggle player_side time_side sliders_side sys_side";
+        on-click = "wlogout";
         tooltip = "false";
       };
     };

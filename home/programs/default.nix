@@ -1,7 +1,5 @@
-
 {
   imports = [
-    ./alacritty
     ./dunst
     ./eww
     ./helix

@@ -27,8 +27,10 @@ in {
 
       #lang
       zls-flake.packages.${pkgs.system}.zls
-      # zigpkgs.master
+      zigpkgs.master
       jdk17
+      gcc
+
       # language-servers.packages.${pkgs.system}.jdt-language-server
       maven
       nodejs
@@ -57,6 +59,7 @@ in {
       recapp #screenrecorder
       ollama
       gparted
+      foliate
 
       #utils
       ripgrep
@@ -87,6 +90,7 @@ in {
       tty-clock
       eza
       btop
+      wlogout
 
       #bluetooth
       bluedevil

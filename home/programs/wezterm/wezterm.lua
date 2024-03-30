@@ -6,31 +6,32 @@ local function font_with_fallback(name, params)
 end
 
 -- local font_name = "JetBrainsMonoNL NF"
-local font_name = "CommitMono-Regular";
+local font_name = "CommitMono-Regular"
 
 return {
 	-- OpenGL for GPU acceleration, Software for CPU
 	front_end = "OpenGL",
 
 	-- Shell integration
-	default_prog = {'zsh'},
+	default_prog = { "zsh" },
 
 	-- Appearance
-	color_scheme = 'Rosé Pine Dawn (base16)',
+	color_scheme = "Rosé Pine Dawn (base16)",
 	-- color_scheme = 'oxocarbon',
 	-- color_scheme = 'Oxocarbon Dark (Gogh)',
 
 	colors = {
-		background = '#121212',
+		--background = "#121212",
 		-- background = '#050505',
+		background = "#000000",
 	},
 
 	-- Font config
 	font = font_with_fallback(font_name),
 	font_rules = {
 		-- {
-			-- italic = true,
-			-- font = font_with_fallback(font_name, { italic = true }),
+		-- italic = true,
+		-- font = font_with_fallback(font_name, { italic = true }),
 		-- },
 		{
 			italic = false,
@@ -51,7 +52,7 @@ return {
 	default_cursor_style = "BlinkingUnderline",
 
 	-- X11
-	enable_wayland = true,
+	enable_wayland = false,
 
 	-- Keybinds
 	disable_default_key_bindings = true,
@@ -146,26 +147,25 @@ return {
 			action = wezterm.action({ CopyTo = "ClipboardAndPrimarySelection" }),
 		},
 		--TMUX
-		{ key = "1", mods = "ALT",  action= act.SendString '\x021'},
-		{ key = "2", mods = "ALT",  action= act.SendString '\x022'},
-		{ key = "3", mods = "ALT",  action= act.SendString '\x023'},
-		{ key = "4", mods = "ALT",  action= act.SendString '\x024'},
-		{ key = "5", mods = "ALT",  action= act.SendString '\x025'},
-		{ key = "6", mods = "ALT",  action= act.SendString '\x026'},
-		{ key = "7", mods = "ALT",  action= act.SendString '\x027'},
-		{ key = "8", mods = "ALT",  action= act.SendString '\x028'},
-		{ key = "9", mods = "ALT",  action= act.SendString '\x029'},
-		{ key = "0", mods = "ALT",  action= act.SendString '\x020'},
+		{ key = "1", mods = "ALT", action = act.SendString("\x021") },
+		{ key = "2", mods = "ALT", action = act.SendString("\x022") },
+		{ key = "3", mods = "ALT", action = act.SendString("\x023") },
+		{ key = "4", mods = "ALT", action = act.SendString("\x024") },
+		{ key = "5", mods = "ALT", action = act.SendString("\x025") },
+		{ key = "6", mods = "ALT", action = act.SendString("\x026") },
+		{ key = "7", mods = "ALT", action = act.SendString("\x027") },
+		{ key = "8", mods = "ALT", action = act.SendString("\x028") },
+		{ key = "9", mods = "ALT", action = act.SendString("\x029") },
+		{ key = "0", mods = "ALT", action = act.SendString("\x020") },
 
-		{ key = "t", mods = "ALT", action = act.SendString '\x02t'}, 
-		{ key = "w", mods = "ALT", action = act.SendString '\x02w'}, 
-		{ key = "e", mods = "ALT", action = act.SendString '\x02%'},
-		{ key = "e", mods = "ALT|SHIFT", action = act.SendString '\x02"'},
-		{ key = "LeftArrow", mods = "ALT|SHIFT", action = act.SendString  '\x02l'},
-		{ key = "RightArrow", mods = "ALT|SHIFT", action = act.SendString '\x02h'},
-		{ key = "UpArrow", mods = "ALT|SHIFT", action = act.SendString '\x02k'},
-		{ key = "DownArrow", mods = "ALT|SHIFT", action = act.SendString '\x02j'}
-
+		{ key = "t", mods = "ALT", action = act.SendString("\x02t") },
+		{ key = "w", mods = "ALT", action = act.SendString("\x02w") },
+		{ key = "e", mods = "ALT", action = act.SendString("\x02%") },
+		{ key = "e", mods = "ALT|SHIFT", action = act.SendString('\x02"') },
+		{ key = "LeftArrow", mods = "ALT|SHIFT", action = act.SendString("\x02l") },
+		{ key = "RightArrow", mods = "ALT|SHIFT", action = act.SendString("\x02h") },
+		{ key = "UpArrow", mods = "ALT|SHIFT", action = act.SendString("\x02k") },
+		{ key = "DownArrow", mods = "ALT|SHIFT", action = act.SendString("\x02j") },
 	},
 
 	-- Aesthetic Night Colorscheme
@@ -187,7 +187,7 @@ return {
 	-- General
 	automatically_reload_config = true,
 	inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 },
-	-- window_background_opacity = 0.9,
+	window_background_opacity = 0.9,
 	window_close_confirmation = "NeverPrompt",
-  window_frame = { active_titlebar_bg = "#45475a", font = font_with_fallback(font_name, { bold = true }) },
+	window_frame = { active_titlebar_bg = "#45475a", font = font_with_fallback(font_name, { bold = true }) },
 }
