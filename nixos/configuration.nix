@@ -247,7 +247,7 @@ in {
   fonts.packages = with pkgs; [
     commit-mono
     font-awesome
-    (nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
+    #(nerdfonts.override {fonts = ["FiraCode" "DroidSansMono"];})
   ];
 
   #docker

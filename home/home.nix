@@ -75,6 +75,9 @@ in {
       dunst
       pavucontrol
       awscli2
+      playerctl
+      unzip
+      unrar
 
       #misc
       cava
@@ -91,6 +94,7 @@ in {
       eza
       btop
       wlogout
+      nerdfonts
 
       #bluetooth
       bluedevil

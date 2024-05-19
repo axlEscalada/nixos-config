@@ -33,6 +33,8 @@
   system = "${pkgs.gnome.gnome-system-monitor}/bin/gnome-system-monitor";
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   playerctld = "${pkgs.playerctl}/bin/playerctld";
+  wlogout = "${pkgs.wlogout}/bin/wlogout";
+  pavucontrol = "${pkgs.pavucontrol}/bin/pavucontrol";
 
   # Function to simplify making waybar outputs
   jsonOutput = name: {
@@ -274,11 +276,11 @@ in {
           default = ["󰕿" "󰖀" "󰕾"];
         };
         scroll-step = 5;
-        on-click = "pavucontrol";
+        on-click = "${pavucontrol}";
       };
       "custom/launcher" = {
         format = "";
-        on-click = "wlogout";
+        on-click = "${wlogout}";
         tooltip = "false";
       };
     };
