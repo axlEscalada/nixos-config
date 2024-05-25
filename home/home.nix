@@ -3,11 +3,8 @@
   hyprland,
   zls-flake,
   pkgs,
-  language-servers,
   ...
-}: let
-  nvchad = with pkgs; callPackage ../derivations/nvchad.nix {};
-in {
+}: {
   imports = [
     hyprland.homeManagerModules.default
     ./programs
@@ -30,8 +27,6 @@ in {
       zigpkgs.master
       jdk17
       gcc
-
-      # language-servers.packages.${pkgs.system}.jdt-language-server
       maven
       nodejs
       rustc
@@ -42,7 +37,6 @@ in {
       gopls
       docker-compose
 
-      #nvchad
       #User Apps
       celluloid
       discord
@@ -75,10 +69,10 @@ in {
       xflux
       dunst
       pavucontrol
-      awscli2
       playerctl
       unzip
       unrar
+      cozy
 
       #misc
       cava

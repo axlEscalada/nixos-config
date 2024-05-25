@@ -15,10 +15,10 @@
       url = "github:nix-community/home-manager";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    hyprland.url = "github:hyprwm/Hyprland";
+    hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
     # nixvim.url = "github:siph/nixvim-flake";
     # nixvim.url = "github:elythh/nixvim";
-    nixvim.url = "github:axlEscalada/nixvim?rev=ae03f29a21fe7e815439a28414b52505a7b808cb";
+    nixvim.url = "github:axlEscalada/nixvim";
   };
 
   outputs = {
