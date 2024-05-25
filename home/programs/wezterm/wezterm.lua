@@ -21,7 +21,8 @@ return {
 	color_scheme = "Pasque (base16)",
 
 	colors = {
-		background = "#141414",
+		--background = "#141414",
+		background = "#121212",
 	},
 
 	-- Font config
@@ -55,6 +56,7 @@ return {
 	automatically_reload_config = true,
 	inactive_pane_hsb = { saturation = 1.0, brightness = 1.0 },
 	window_background_opacity = 0.9,
+	--window_background_opacity = 1,
 	window_close_confirmation = "NeverPrompt",
 	window_frame = { active_titlebar_bg = "#45475a", font = font_with_fallback(font_name, { bold = true }) },
 

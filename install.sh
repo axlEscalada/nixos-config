@@ -14,7 +14,7 @@ cp -f /etc/nixos/hardware-configuration.nix "$DIR"/nixos/
 if [ ! -f ~/Imagens/wallpapers/menhera.jpg ]; then
     mkdir -p ~/Images/wallpapers/
 
-    cp "$DIR"/home/wallpapers/wallpaper.png ~/Images/wallpapers/
+    cp "$DIR"/home/wallpapers/wallhaven.png ~/Images/wallpapers/
 fi
 if [ ! -f ~/.config/rofi/rofi.png ]; then
     mkdir -p ~/Imagens/wallpapers/

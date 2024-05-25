@@ -18,8 +18,7 @@
     hyprland.url = "github:hyprwm/Hyprland";
     # nixvim.url = "github:siph/nixvim-flake";
     # nixvim.url = "github:elythh/nixvim";
-    #nixvim.url = "github:axlEscalada/nixvim-flake-config";
-    nixvim.url = "github:axlEscalada/nixvim?rev=60f4f4d4f60620a8f323d9c86b89a882b703a722";
+    nixvim.url = "github:axlEscalada/nixvim?rev=ae03f29a21fe7e815439a28414b52505a7b808cb";
   };
 
   outputs = {

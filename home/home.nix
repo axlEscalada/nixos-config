@@ -70,6 +70,7 @@ in {
       gnumake
       catimg
       curl
+      ffmpeg
       appimage-run
       xflux
       dunst
