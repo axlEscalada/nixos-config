@@ -145,7 +145,7 @@ in {
       bind = $mainMod, F, exec, nautilus
       bind = $mainMod, V, togglefloating,
       bind = $mainMod, w, exec, wofi --show drun
-      bind = $mainMod, R, exec, rofi --show
+      bind = $mainMod, R, exec, rofi -show drun
       bind = $mainMod, P, pseudo, # dwindle
       bind = $mainMod, J, togglesplit, # dwindle
 
