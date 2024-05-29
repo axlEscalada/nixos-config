@@ -1,19 +1,14 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  config,
-  pkgs,
-  programs,
-  musnix,
-  lib,
-  ...
-}: let
+{pkgs, ...}: let
   tokyo-night-sddm = pkgs.libsForQt5.callPackage ./tokyo-night-sddm/default.nix {};
 in {
   imports = [
     # Include the results of the xhardware scan.
     ./hardware-configuration.nix
+    ./hyprland.nix
+    ./gnome.nix
   ];
 
   # Bootloader.
@@ -40,11 +35,30 @@ in {
     };
   };
   #GPU
-  services.xserver.enable = true;
-  services.xserver.videoDrivers = ["amdgpu"];
-  services.xserver.displayManager.sddm.enable = true;
-  services.xserver.displayManager.sddm.wayland.enable = true;
-  services.xserver.displayManager.sddm.theme = "tokyo-night-sddm";
+  # services.xserver.displayManager.sddm.enable = true;
+  # services.xserver.displayManager.sddm.wayland.enable = true;
+  # services.xserver.displayManager.sddm.theme = "tokyo-night-sddm";
+  services = {
+    xserver = {
+      enable = true;
+      excludePackages = [pkgs.xterm];
+      videoDrivers = ["amdgpu"];
+      displayManager.sddm = {
+        enable = true;
+        wayland = {
+          enable = true;
+        };
+        theme = "tokyo-night-sddm";
+      };
+    };
+    printing.enable = true;
+    flatpak.enable = true;
+  };
+  # services.logind.extraConfig = ''
+  #   HandlePowerKey=ignore
+  #   HandleLidSwitch=suspend
+  #   HandleLidSwitchExternalPower=ignore
+  # '';
 
   networking = {
     hostName = "nixos"; # Define your hostname.
@@ -140,8 +154,6 @@ in {
       auth include login
     '';
   };
-  #FLATPACK
-  services.flatpak.enable = true;
 
   #Enable headset buttons control media player
   systemd.user.services.mpris-proxy = {

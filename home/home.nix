@@ -9,7 +9,6 @@
     hyprland.homeManagerModules.default
     ./programs
     ./scripts
-    ./themes
   ];
 
   home = {
@@ -54,6 +53,7 @@
       ollama
       gparted
       foliate
+      spotify
 
       #utils
       ripgrep

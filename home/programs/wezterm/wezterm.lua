@@ -146,9 +146,9 @@ return {
 			action = "ActivateCopyMode",
 		},
 		{
-			key = "v",
-			mods = "CTRL|SHIFT",
-			action = wezterm.action({ PasteFrom = "Clipboard" }),
+			key = "V",
+			mods = "CTRL",
+			action = act.PasteFrom("Clipboard"),
 		},
 		{
 			key = "c",

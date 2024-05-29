@@ -19,9 +19,12 @@
     # nixvim.url = "github:siph/nixvim-flake";
     # nixvim.url = "github:elythh/nixvim";
     nixvim.url = "github:axlEscalada/nixvim";
+    matugen.url = "github:Iniox/matugen?ref=v2.0.0";
+    ags.url = "github:Aylur/ags";
+    astal.url = "github:Aylur/astal";
   };
 
-  outputs = {
+  outputs = inputs @ {
     self,
     nixpkgs,
     home-manager,
@@ -33,18 +36,22 @@
     nixvim,
     ...
   }: let
-    system = "x86_64-linux";
-    pkgs = import nixpkgs {
-      inherit system;
-      config.allowUnfree = true;
-    };
     lib = nixpkgs.lib;
     overlays = [zig.overlays.default];
   in {
+    formatter = {
+      x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
+    };
+
+    packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./ags {inherit inputs;};
+
     nixosConfigurations = {
       axl = lib.nixosSystem rec {
-        inherit system;
-        specialArgs = {inherit nixvim hyprland zls-flake language-servers;};
+        system = "x86_64-linux";
+        specialArgs = {
+          inherit inputs nixvim hyprland zls-flake language-servers;
+          asztal = self.packages.x86_64-linux.default;
+        };
         modules = [
           ./nixos/configuration.nix
           hyprland.nixosModules.default

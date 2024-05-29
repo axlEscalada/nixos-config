@@ -1,5 +1,6 @@
 {
   imports = [
+    ./ags
     ./dunst
     ./eww
     ./helix
@@ -7,9 +8,10 @@
     ./kitty
     ./rofi
     ./tmux
-    ./waybar
-    ./waybar/swayidle.nix
-    ./waybar/swaylock.nix
+    ./theme.nix
+    # ./waybar
+    # ./waybar/swayidle.nix
+    # ./waybar/swaylock.nix
     ./wezterm
     ./zsh
   ];
