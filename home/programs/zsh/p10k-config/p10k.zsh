@@ -46,6 +46,20 @@
   local cyan='6'
   local white='7'
 
+  #
+  # Instant prompt mode.
+  #
+  #   - off:     Disable instant prompt. Choose this if you've tried instant prompt and found
+  #              it incompatible with your zsh configuration files.
+  #   - quiet:   Enable instant prompt and don't print warnings when detecting console output
+  #              during zsh initialization. Choose this if you've read and understood
+  #              https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
+  #   - verbose: Enable instant prompt and print a warning when detecting console output during
+  #              zsh initialization. Choose this if you've never tried instant prompt, haven't
+  #              seen the warning, or if you are unsure what this all means.
+  typeset -g POWERLEVEL9K_INSTANT_PROMPT=quiet
+
+
   # Left prompt segments.
   typeset -g POWERLEVEL9K_LEFT_PROMPT_ELEMENTS=(
     # context                 # user@host
@@ -55,7 +69,6 @@
     # virtualenv              # python virtual environment
     prompt_char               # prompt symbol
   )
-
   # Right prompt segments.
   typeset -g POWERLEVEL9K_RIGHT_PROMPT_ELEMENTS=(
     command_execution_time    # previous command duration
@@ -163,17 +176,6 @@
   #               typed after changing current working directory.
   typeset -g POWERLEVEL9K_TRANSIENT_PROMPT=off
 
-  # Instant prompt mode.
-  #
-  #   - off:     Disable instant prompt. Choose this if you've tried instant prompt and found
-  #              it incompatible with your zsh configuration files.
-  #   - quiet:   Enable instant prompt and don't print warnings when detecting console output
-  #              during zsh initialization. Choose this if you've read and understood
-  #              https://github.com/romkatv/powerlevel10k/blob/master/README.md#instant-prompt.
-  #   - verbose: Enable instant prompt and print a warning when detecting console output during
-  #              zsh initialization. Choose this if you've never tried instant prompt, haven't
-  #              seen the warning, or if you are unsure what this all means.
-  typeset -g POWERLEVEL9K_INSTANT_PROMPT=verbose
 
   # Hot reload allows you to change POWERLEVEL9K options after Powerlevel10k has been initialized.
   # For example, you can type POWERLEVEL9K_BACKGROUND=red and see your prompt turn red. Hot reload

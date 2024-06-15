@@ -7,12 +7,15 @@
     ./hypr
     ./kitty
     ./rofi
-    ./tmux
+    # ./tmux
     ./theme.nix
+    ./alacritty
     # ./waybar
     # ./waybar/swayidle.nix
     # ./waybar/swaylock.nix
     ./wezterm
+    ./zathura
+    ./zellij
     ./zsh
   ];
 }

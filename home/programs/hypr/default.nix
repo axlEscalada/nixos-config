@@ -119,7 +119,7 @@ in {
           "SHIFT,Print,    ${e} -r 'recorder.screenshot(true)'"
           "SUPER, Return, exec, xterm" # xterm is a symlink, not actually xterm
           "SUPER, W, exec, firefox"
-          "SUPER, E, exec, wezterm -e tmux"
+          "SUPER, E, exec, wezterm"
 
           # youtube
           ", XF86Launch1,  exec, ${yt}"

@@ -52,7 +52,6 @@ in {
       };
     };
     printing.enable = true;
-    flatpak.enable = true;
   };
   # services.logind.extraConfig = ''
   #   HandlePowerKey=ignore
@@ -197,7 +196,19 @@ in {
   # (e.g. man configuration.nix or on https://nixos.org/nixos/options.html).
   system.stateVersion = "23.05"; # Did you read the comment?
 
-  programs.hyprland.enable = true;
+  programs = {
+    hyprland.enable = true;
+    nix-ld.enable = true;
+    nix-ld.libraries = with pkgs; [
+      zlib
+      libgcc
+      # that's where the shared libs go, you can find which one you need using
+      # nix-locate --top-level libstdc++.so.6  (replace this with your lib)
+      # ^ this requires `nix-index` pkg
+    ];
+  };
+  zramSwap.enable = true;
+  zramSwap.algorithm = "zstd";
 
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [

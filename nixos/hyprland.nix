@@ -33,6 +33,7 @@
       ];
     };
 
+    services.flatpak.enable = true;
     security = {
       polkit.enable = true;
       pam.services.ags = {};

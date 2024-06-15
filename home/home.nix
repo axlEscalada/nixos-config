@@ -53,6 +53,7 @@
       ollama
       gparted
       foliate
+      okular
       spotify
 
       #utils
@@ -73,6 +74,8 @@
       unzip
       unrar
       cozy
+      unixtools.xxd
+      nix-index
 
       #misc
       cava
