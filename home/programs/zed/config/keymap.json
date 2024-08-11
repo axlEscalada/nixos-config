@@ -1,0 +1,18 @@
+[
+  {
+    "context": "Editor && vim_mode == normal && !VimWaiting && !menu",
+    "bindings": {
+      // put key-bindings here if you want them to work only in normal mode
+      "; f": ["workspace::SendKeystrokes", "cmd-p"],
+      "space space": ["workspace::SendKeystrokes", "cmd-p"],
+      "space /": ["workspace::SendKeystrokes", "cmd-shift-f"],
+      "tab": ["workspace::SendKeystrokes", "cmd-}"],
+      "shift-tab": ["workspace::SendKeystrokes", "cmd-{"],
+      "g c": ["workspace::SendKeystrokes", "cmd-/"],
+      "g r": ["workspace::SendKeystrokes", "alt-shift-f12"],
+      "e f": ["workspace::SendKeystrokes", "cmd-b"]
+      // "down": ["workspace::SendKeystrokes", "4 j"]
+      // "up": ["workspace::SendKeystrokes", "4 k"]
+    }
+  }
+]

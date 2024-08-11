@@ -129,7 +129,7 @@ in {
           "SUPER, K, killactive"
           "SUPER, F, togglefloating"
           "SUPER, G, fullscreen"
-          "SUPER, O, fakefullscreen"
+          "SUPER, O, fullscreenstate"
           "SUPER, P, togglesplit"
 
           (mvfocus "k" "u")

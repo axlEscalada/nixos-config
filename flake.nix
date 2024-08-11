@@ -16,11 +16,17 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     hyprland.url = "git+https://github.com/hyprwm/Hyprland?submodules=1";
-    # nixvim.url = "github:siph/nixvim-flake";
-    # nixvim.url = "github:elythh/nixvim";
+    # Hypridle
+    hypridle.url = "github:hyprwm/Hypridle";
+    # Hyprlock
+    hyprlock = {
+      url = "github:hyprwm/Hyprlock";
+      # NOTE: required to prevent red screen on lock
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     nixvim.url = "github:axlEscalada/nixvim";
     matugen.url = "github:Iniox/matugen?ref=v2.0.0";
-    ags.url = "github:Aylur/ags";
+    ags.url = "github:axlEscalada/ags";
     astal.url = "github:Aylur/astal";
   };
 
@@ -37,13 +43,22 @@
     ...
   }: let
     lib = nixpkgs.lib;
-    overlays = [zig.overlays.default];
+    overlays = [
+      zig.overlays.default
+      (final: prev: {
+        foliate = final.callPackage ./derivations/foliate.nix {};
+      })
+    ];
   in {
     formatter = {
       x86_64-linux = nixpkgs.legacyPackages.x86_64-linux.alejandra;
     };
 
-    packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./ags {inherit inputs;};
+    # packages.x86_64-linux.default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./ags {inherit inputs;};
+    packages.x86_64-linux = {
+      default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./ags {inherit inputs;};
+      foliate = nixpkgs.legacyPackages.x86_64-linux.callPackage ./foliate.nix {};
+    };
 
     nixosConfigurations = {
       axl = lib.nixosSystem rec {

@@ -20,6 +20,8 @@
     (with pkgs; [
       #editor
       nixvim.packages.${pkgs.system}.default
+      zed-editor
+      jetbrains.idea-community
 
       #lang
       zls-flake.packages.${pkgs.system}.zls
@@ -50,11 +52,14 @@
       google-chrome
       kooha #screerecorder
       recapp #screenrecorder
-      ollama
       gparted
       foliate
       okular
       spotify
+      obsidian
+      vscode
+      piper #mouseconfig
+      libratbag
 
       #utils
       ripgrep
@@ -73,9 +78,10 @@
       playerctl
       unzip
       unrar
-      cozy
+      # cozy
       unixtools.xxd
       nix-index
+      udisks
 
       #misc
       cava

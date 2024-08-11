@@ -25,12 +25,11 @@
     device = "/dev/disk/by-uuid/897C-09A6";
     fsType = "vfat";
   };
-
-  #fileSystems."/mnt/newssd" =
-  #  { device = "/dev/disk/by-uuid/60ba7d20-680e-4f16-adaf-b57a9187f5a0";
-  #    fsType = "ext4";
-  #    #options = [ "defaults" "user" "rw" "utf8" "umask=000" ];
-  #  };
+  fileSystems."/mnt/ssd" = {
+    device = "/dev/disk/by-uuid/60ba7d20-680e-4f16-adaf-b57a9187f5a0";
+    fsType = "ext4";
+    #options = [ "defaults" "user" "rw" "utf8" "umask=000" ];
+  };
 
   #disable due to zram usage
   swapDevices = [
@@ -49,8 +48,8 @@
 
   nixpkgs.hostPlatform = lib.mkDefault "x86_64-linux";
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
-  hardware.opengl.driSupport = true;
-  hardware.opengl.driSupport32Bit = true;
+  # hardware.opengl.driSupport = true;
+  # hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages = with pkgs; [
     rocm-opencl-icd
     rocm-opencl-runtime

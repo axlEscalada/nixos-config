@@ -1,8 +1,13 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{pkgs, ...}: let
+{
+  pkgs,
+  inputs,
+  ...
+}: let
   tokyo-night-sddm = pkgs.libsForQt5.callPackage ./tokyo-night-sddm/default.nix {};
+  inherit (inputs) hypridle;
 in {
   imports = [
     # Include the results of the xhardware scan.
@@ -52,6 +57,17 @@ in {
       };
     };
     printing.enable = true;
+    udisks2.enable = true;
+    ollama = {
+      enable = true;
+      acceleration = "rocm";
+      environmentVariables = {
+        HSA_OVERRIDE_GFX_VERSION = "10.3.1";
+      };
+    };
+    hypridle = {
+      enable = true;
+    };
   };
   # services.logind.extraConfig = ''
   #   HandlePowerKey=ignore
@@ -116,11 +132,6 @@ in {
   # List packages installed in system profile. To search, run:
   # $ nix search wget
 
-  environment.sessionVariables = {
-    WRL_NO_HARDWARE_CURSORS = "1";
-    NIXOS_OZONE_WL = "1";
-  };
-
   environment.homeBinInPath = true;
 
   environment.systemPackages = with pkgs; [
@@ -137,7 +148,17 @@ in {
     libreoffice-qt
     killall
     qbittorrent
+    gtk4
+    glib
+    gobject-introspection
+    gjs
+    libadwaita
   ];
+
+  environment.sessionVariables = {
+    WRL_NO_HARDWARE_CURSORS = "1";
+    NIXOS_OZONE_WL = "1";
+  };
 
   services.pipewire = {
     enable = true;
@@ -207,8 +228,11 @@ in {
       # ^ this requires `nix-index` pkg
     ];
   };
-  zramSwap.enable = true;
-  zramSwap.algorithm = "zstd";
+  zramSwap = {
+    enable = true;
+    algorithm = "zstd";
+    memoryPercent = 100;
+  };
 
   fonts.fontDir.enable = true;
   fonts.packages = with pkgs; [

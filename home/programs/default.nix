@@ -5,6 +5,8 @@
     ./eww
     ./helix
     ./hypr
+    ./hypridle
+    ./hyprlock
     ./kitty
     ./rofi
     # ./tmux
@@ -15,6 +17,7 @@
     # ./waybar/swaylock.nix
     ./wezterm
     ./zathura
+    # ./zed
     ./zellij
     ./zsh
   ];

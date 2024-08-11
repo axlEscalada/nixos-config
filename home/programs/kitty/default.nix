@@ -104,24 +104,24 @@
 
     #keybinds
 
-    map alt+1 send_text all \x021
-    map alt+2 send_text all \x022
-    map alt+3 send_text all \x023
-    map alt+4 send_text all \x024
-    map alt+5 send_text all \x025
-    map alt+6 send_text all \x026
-    map alt+7 send_text all \x027
-    map alt+8 send_text all \x028
-    map alt+9 send_text all \x029
-    map alt+0 send_text all \x020
-    map alt+t send_text all \x02t
-    map alt+w send_text all \x02w
-    map alt+e send_text all \x02%
-    map alt+shift+e send_text all \x02"
-    map alt+shift+left send_text all \x02l
-    map alt+shift+right send_text all \x02h
-    map alt+shift+up send_text all \x02k
-    map alt+shift+down send_text all \x02j
+    # map alt+1 send_text all \x021
+    # map alt+2 send_text all \x022
+    # map alt+3 send_text all \x023
+    # map alt+4 send_text all \x024
+    # map alt+5 send_text all \x025
+    # map alt+6 send_text all \x026
+    # map alt+7 send_text all \x027
+    # map alt+8 send_text all \x028
+    # map alt+9 send_text all \x029
+    # map alt+0 send_text all \x020
+    # map alt+t send_text all \x02t
+    # map alt+w send_text all \x02w
+    # map alt+e send_text all \x02%
+    # map alt+shift+e send_text all \x02"
+    # map alt+shift+left send_text all \x02l
+    # map alt+shift+right send_text all \x02h
+    # map alt+shift+up send_text all \x02k
+    # map alt+shift+down send_text all \x02j
 
     # Tab bar colors
     active_tab_foreground   #11111B

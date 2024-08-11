@@ -3,6 +3,30 @@ pane_frames false
 copy_on_select true
 default_shell "zsh"
 
+ui {
+    pane_frames {
+        hide_session_name true
+    }
+}
+
+themes {
+    dark-statusbar {
+        fg "#1d1d1d"
+        bg "#383838"//selection text color
+        black "#0d0d0d"//color bar that should match terminal background
+        red "#f44747"
+        green "#363636"//tab number background color
+        yellow "#dcdcaa"
+        blue "#569cd6"
+        magenta "#c678dd"
+        cyan "#4ec9b0"
+        white "#d4d4d4"
+        orange "#ce9178"
+    }
+}
+
+theme "dark-statusbar"
+
 keybinds clear-defaults=true {
   normal {
     bind "Ctrl t" { SwitchToMode "Tab"; }
@@ -23,6 +47,8 @@ keybinds clear-defaults=true {
     bind "Alt Down" "Alt j" { MoveFocus "Down"; }
     bind "Alt Up" "Alt k" { MoveFocus "Up"; }
     bind "Alt Left" "Alt h" { MoveFocus "Left"; }
+    bind "Alt -" { Resize "-"; }
+    bind "Alt _" { Resize "+"; }
   }
   tab {
     bind "Ctrl t" { SwitchToMode "Normal"; }
