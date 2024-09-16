@@ -9,7 +9,7 @@
     ./hyprlock
     ./kitty
     ./rofi
-    # ./tmux
+    ./tmux
     ./theme.nix
     ./alacritty
     # ./waybar

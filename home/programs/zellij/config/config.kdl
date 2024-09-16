@@ -13,7 +13,7 @@ themes {
     dark-statusbar {
         fg "#1d1d1d"
         bg "#383838"//selection text color
-        black "#0d0d0d"//color bar that should match terminal background
+        black "#151515"//color bar that should match terminal background
         red "#f44747"
         green "#363636"//tab number background color
         yellow "#dcdcaa"

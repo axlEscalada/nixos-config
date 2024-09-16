@@ -37,6 +37,10 @@
       go
       gopls
       docker-compose
+      ##gleam
+      gleam
+      erlang
+      rebar3
 
       #User Apps
       celluloid
@@ -62,6 +66,7 @@
       libratbag
 
       #utils
+      gdb
       ripgrep
       jq
       ranger
