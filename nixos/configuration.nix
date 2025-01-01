@@ -1,14 +1,15 @@
 # Edit this configuration file to define what should be installed on
 # your system.  Help is available in the configuration.nix(5) man page
 # and in the NixOS manual (accessible by running ‘nixos-help’).
-{
-  pkgs,
-  inputs,
-  ...
-}: let
-  tokyo-night-sddm = pkgs.libsForQt5.callPackage ./tokyo-night-sddm/default.nix {};
+{ pkgs
+, inputs
+, ...
+}:
+let
+  tokyo-night-sddm = pkgs.libsForQt5.callPackage ./tokyo-night-sddm/default.nix { };
   inherit (inputs) hypridle;
-in {
+in
+{
   imports = [
     # Include the results of the xhardware scan.
     ./hardware-configuration.nix
@@ -30,7 +31,7 @@ in {
       # `grub-install` if efiSupport is true
       # (the devices list is not used by the EFI grub install,
       # but must be set to some value in order to pass an assert in grub.nix)
-      devices = ["nodev"];
+      devices = [ "nodev" ];
       efiSupport = true;
       enable = true;
       version = 2;
@@ -46,8 +47,8 @@ in {
   services = {
     xserver = {
       enable = true;
-      excludePackages = [pkgs.xterm];
-      videoDrivers = ["amdgpu"];
+      excludePackages = [ pkgs.xterm ];
+      videoDrivers = [ "amdgpu" ];
       displayManager.sddm = {
         enable = true;
         wayland = {
@@ -55,6 +56,7 @@ in {
         };
         theme = "tokyo-night-sddm";
       };
+      wacom.enable = true;
     };
     printing.enable = true;
     udisks2.enable = true;
@@ -68,6 +70,7 @@ in {
     hypridle = {
       enable = true;
     };
+    spice-vdagentd.enable = true;
   };
   # services.logind.extraConfig = ''
   #   HandlePowerKey=ignore
@@ -81,8 +84,8 @@ in {
     networkmanager.enable = true;
     firewall = {
       enable = true;
-      allowedTCPPorts = [6800];
-      allowedUDPPorts = [52150];
+      allowedTCPPorts = [ 6800 ];
+      allowedUDPPorts = [ 52150 ];
     };
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -120,11 +123,11 @@ in {
   users.users.axl = {
     isNormalUser = true;
     description = "axl";
-    extraGroups = ["networkmanager" "wheel" "docker"];
-    packages = with pkgs; [];
+    extraGroups = [ "networkmanager" "wheel" "docker" "libvirtd" "kvm" ];
+    packages = with pkgs; [ ];
   };
-  users.extraGroups.docker.members = ["axl"];
-  users.extraUsers.axl.extraGroups = ["jackaudio"];
+  users.extraGroups.docker.members = [ "axl" ];
+  users.extraUsers.axl.extraGroups = [ "jackaudio" ];
 
   # Allow unfree packages
   nixpkgs.config.allowUnfree = true;
@@ -135,6 +138,17 @@ in {
   environment.homeBinInPath = true;
 
   environment.systemPackages = with pkgs; [
+    virt-manager
+    virt-viewer
+    spice-gtk
+    spice-protocol
+    qemu
+    libvirt
+    libwacom
+    xf86_input_wacom
+    wacomtablet
+    libinput
+    krita
     tokyo-night-sddm
     eww
     dunst
@@ -153,6 +167,18 @@ in {
     gobject-introspection
     gjs
     libadwaita
+    #fish
+    fishPlugins.done
+    fishPlugins.fzf-fish
+    fishPlugins.forgit
+    fishPlugins.hydro
+    fishPlugins.tide
+    fzf
+    fishPlugins.grc
+    grc
+    #enable man pages
+    man-pages
+    man-pages-posix
   ];
 
   environment.sessionVariables = {
@@ -178,8 +204,8 @@ in {
   #Enable headset buttons control media player
   systemd.user.services.mpris-proxy = {
     description = "Mpris proxy";
-    after = ["network.target" "sound.target"];
-    wantedBy = ["default.target"];
+    after = [ "network.target" "sound.target" ];
+    wantedBy = [ "default.target" ];
     serviceConfig.ExecStart = "${pkgs.bluez}/bin/mpris-proxy";
   };
   # Some programs need SUID wrappers, can be configured further or are
@@ -194,7 +220,7 @@ in {
 
   # Enable experimental features
   nix = {
-    package = pkgs.nixFlakes;
+    package = pkgs.nixVersions.stable;
     extraOptions = ''
       experimental-features = nix-command flakes
     '';
@@ -227,6 +253,7 @@ in {
       # nix-locate --top-level libstdc++.so.6  (replace this with your lib)
       # ^ this requires `nix-index` pkg
     ];
+    fish.enable = true;
   };
   zramSwap = {
     enable = true;
@@ -247,4 +274,24 @@ in {
     enable = true;
     setSocketVariable = true;
   };
+  virtualisation = {
+    libvirtd = {
+      enable = true;
+      onBoot = "ignore";
+      onShutdown = "shutdown";
+      qemu = {
+        package = pkgs.qemu;
+        ovmf.enable = true;
+        swtpm.enable = true;
+      };
+    };
+  };
+
+  systemd.services.libvirtd = {
+    enable = true;
+    wantedBy = [ "multi-user.target" ];
+    requires = [ "virtlogd.service" ];
+  };
+
+  home-manager.backupFileExtension = "backup";
 }

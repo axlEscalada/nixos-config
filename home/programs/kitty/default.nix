@@ -1,7 +1,6 @@
-{
-  config,
-  pkgs,
-  ...
+{ config
+, pkgs
+, ...
 }: {
   home.file.".config/kitty/rose-pine-custom.conf".text = ''
     ## name: Rosé Pine Custom
@@ -92,6 +91,8 @@
 
     # URL underline color when hovering with mouse
     url_color               #F5E0DC
+
+    copy_on_select yes
 
     # Kitty window border colors
     active_border_color     #B4BEFE

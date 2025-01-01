@@ -51,8 +51,8 @@
   # hardware.opengl.driSupport = true;
   # hardware.opengl.driSupport32Bit = true;
   hardware.opengl.extraPackages = with pkgs; [
-    rocm-opencl-icd
-    rocm-opencl-runtime
+    # rocm-opencl-icd
+    # rocm-opencl-runtime
   ];
   hardware.bluetooth.enable = true; # enables support for Bluetooth
   hardware.bluetooth.powerOnBoot = true; # powers up the default Bluetooth controller on boot

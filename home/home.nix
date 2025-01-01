@@ -1,9 +1,9 @@
-{
-  nixvim,
-  hyprland,
-  zls-flake,
-  pkgs,
-  ...
+{ nixvim
+, ghostty
+, hyprland
+, zls-flake
+, pkgs
+, ...
 }: {
   imports = [
     hyprland.homeManagerModules.default
@@ -22,6 +22,10 @@
       nixvim.packages.${pkgs.system}.default
       zed-editor
       jetbrains.idea-community
+      android-studio
+
+      #terminal
+      ghostty.packages.${pkgs.system}.default
 
       #lang
       zls-flake.packages.${pkgs.system}.zls
@@ -64,6 +68,8 @@
       vscode
       piper #mouseconfig
       libratbag
+      burpsuite
+      android-tools
 
       #utils
       gdb
@@ -103,16 +109,15 @@
       eza
       btop
       wlogout
-      nerdfonts
+      # nerdfonts
+      # copyq
 
       #bluetooth
       bluedevil
       bluez
       # bluez-qt
       gedit
-    ])
-    ++ (with pkgs.gnome; [
-      nautilus
+
       zenity
       gnome-tweaks
       eog

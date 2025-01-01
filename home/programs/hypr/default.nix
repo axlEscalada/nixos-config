@@ -1,8 +1,8 @@
-{
-  inputs,
-  pkgs,
-  ...
-}: let
+{ inputs
+, pkgs
+, ...
+}:
+let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
   yt = pkgs.writeShellScript "yt" ''
     notify-send "Opening video" "$(wl-paste)"
@@ -12,7 +12,8 @@
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
-in {
+in
+{
   # imports = [
   #   ./hyprland-environment.nix
   # ];
@@ -21,8 +22,8 @@ in {
     name = "Settings";
     comment = "Gnome Control Center";
     icon = "org.gnome.Settings";
-    exec = "env XDG_CURRENT_DESKTOP=gnome ${pkgs.gnome.gnome-control-center}/bin/gnome-control-center";
-    categories = ["X-Preferences"];
+    exec = "env XDG_CURRENT_DESKTOP=gnome ${pkgs.gnome-control-center}/bin/gnome-control-center";
+    categories = [ "X-Preferences" ];
     terminal = false;
   };
 
@@ -34,13 +35,15 @@ in {
     xwayland.enable = true;
     settings = {
       exec-once = [
-        "ags -b hypr"
+        # "ags -b hypr"
+        "asztal"
         "hyprctl setcursor Qogir 24"
         "transmission-gtk"
+        "wl-paste -p --watch wl-copy -p"
       ];
 
       monitor = [
-        "DP-3,1920x1080@144,1920x0,1,bitdepth,10"
+        "DP-3,1920x1080@60,1920x0,1,bitdepth,10"
         "HDMI-A-1,1920x1080,0x0,1,bitdepth,10"
       ];
 
@@ -81,48 +84,48 @@ in {
         workspace_swipe_use_r = true;
       };
 
-      windowrule = let
-        f = regex: "float, ^(${regex})$";
-      in [
-        (f "org.gnome.Calculator")
-        (f "org.gnome.Nautilus")
-        (f "pavucontrol")
-        (f "nm-connection-editor")
-        (f "blueberry.py")
-        (f "org.gnome.Settings")
-        (f "org.gnome.design.Palette")
-        (f "Color Picker")
-        (f "xdg-desktop-portal")
-        (f "xdg-desktop-portal-gnome")
-        (f "transmission-gtk")
-        (f "com.github.Aylur.ags")
-        "workspace 7, title:Spotify"
-      ];
-
-      bind = let
-        binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
-        mvfocus = binding "SUPER" "movefocus";
-        ws = binding "SUPER" "workspace";
-        resizeactive = binding "SUPER CTRL" "resizeactive";
-        mvactive = binding "SUPER ALT" "moveactive";
-        mvtows = binding "SUPER SHIFT" "movetoworkspace";
-        e = "exec, ags -b hypr";
-        arr = [1 2 3 4 5 6 7];
-      in
+      windowrule =
+        let
+          f = regex: "float, ^(${regex})$";
+        in
         [
-          "CTRL SHIFT, R,  ${e} quit; ags -b hypr"
-          "SUPER, R,       ${e} -t launcher"
-          "SUPER, Tab,     ${e} -t overview"
-          ",XF86PowerOff,  ${e} -r 'powermenu.shutdown()'"
-          ",XF86Launch4,   ${e} -r 'recorder.start()'"
-          ",Print,         ${e} -r 'recorder.screenshot()'"
-          "SHIFT,Print,    ${e} -r 'recorder.screenshot(true)'"
-          "SUPER, Return, exec, xterm" # xterm is a symlink, not actually xterm
-          "SUPER, W, exec, firefox"
-          "SUPER, E, exec, wezterm"
+          (f "org.gnome.Calculator")
+          (f "org.gnome.Nautilus")
+          (f "pavucontrol")
+          (f "nm-connection-editor")
+          (f "blueberry.py")
+          (f "org.gnome.Settings")
+          (f "org.gnome.design.Palette")
+          (f "Color Picker")
+          (f "xdg-desktop-portal")
+          (f "xdg-desktop-portal-gnome")
+          (f "transmission-gtk")
+          (f "com.github.Aylur.ags")
+          "workspace 7, title:Spotify"
+        ];
 
-          # youtube
-          ", XF86Launch1,  exec, ${yt}"
+      bind =
+        let
+          binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
+          mvfocus = binding "SUPER" "movefocus";
+          ws = binding "SUPER" "workspace";
+          resizeactive = binding "SUPER CTRL" "resizeactive";
+          mvactive = binding "SUPER ALT" "moveactive";
+          mvtows = binding "SUPER SHIFT" "movetoworkspace";
+          arr = [ 1 2 3 4 5 6 7 ];
+        in
+        [
+          "CTRL SHIFT, R, exec,         asztal quit; asztal"
+          "SUPER, R, exec,              asztal -t launcher"
+          "SUPER, Tab, exec,            asztal -t overview"
+          ",XF86PowerOff, exec,         asztal -t powermenu"
+          ",XF86Launch4, exec,          screenrecord"
+          "SHIFT, XF86Launch4, exec,    screenrecord --full"
+          ",Print, exec,                screenshot"
+          "SHIFT, Print, exec,          screenshot --full"
+          "SUPER, Return, exec,         xterm" # xterm is a symlink, not actually xterm
+          "SUPER, W, exec,              firefox"
+          "SUPER, E, exec,              ghostty"
 
           "ALT, Tab, focuscurrentorlast"
           "CTRL ALT, Delete, exit"
@@ -176,10 +179,12 @@ in {
       ];
 
       decoration = {
-        drop_shadow = "yes";
-        shadow_range = 8;
-        shadow_render_power = 2;
-        "col.shadow" = "rgba(00000044)";
+        shadow = {
+          enabled = true;
+          range = 8;
+          render_power = 2;
+          color = "rgba(00000044)";
+        };
 
         dim_inactive = false;
 

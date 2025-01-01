@@ -15,7 +15,7 @@
       	set-option -g renumber-windows on
         set -g default-terminal "screen"
 
-        set-option -g default-shell ${pkgs.zsh}/bin/zsh
+        set-option -g default-shell ${pkgs.fish}/bin/fish
         # Set status bar and message style to empty (no color)
         set -g status-style ""
         set -g message-style ""

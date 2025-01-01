@@ -1,10 +1,9 @@
-{
-  pkgs,
-  inputs,
-  config,
-  asztal,
-  lib,
-  ...
+{ pkgs
+, inputs
+, config
+, asztal
+, lib
+, ...
 }: {
   options.hyprland = {
     enable = lib.mkEnableOption "Hyprland";
@@ -12,7 +11,7 @@
 
   config = lib.mkIf config.hyprland.enable {
     nix.settings = {
-      substituters = ["https://hyprland.cachix.org"];
+      substituters = [ "https://hyprland.cachix.org" ];
       trusted-public-keys = [
         "hyprland.cachix.org-1:a7pgxzMz7+chwVL3/pzj6jIBMioiJM7ypFP8PwtkuGc="
       ];
@@ -36,17 +35,17 @@
     services.flatpak.enable = true;
     security = {
       polkit.enable = true;
-      pam.services.ags = {};
+      pam.services.ags = { };
     };
 
-    environment.systemPackages = with pkgs;
-    with gnome; [
+    environment.systemPackages = with pkgs; [
       morewaita-icon-theme
       adwaita-icon-theme
       qogir-icon-theme
       loupe
       nautilus
       baobab
+      cliphist
       gnome-text-editor
       gnome-calendar
       gnome-boxes
@@ -64,12 +63,37 @@
       swww
     ];
 
+    # environment.systemPackages = with pkgs;
+    #   with gnome; [
+    #     morewaita-icon-theme
+    #     adwaita-icon-theme
+    #     qogir-icon-theme
+    #     loupe
+    #     nautilus
+    #     baobab
+    #     gnome-text-editor
+    #     gnome-calendar
+    #     gnome-boxes
+    #     gnome-system-monitor
+    #     gnome-control-center
+    #     gnome-weather
+    #     gnome-calculator
+    #     gnome-clocks
+    #     gnome-software # for flatpak
+    #     wl-gammactl
+    #     wl-clipboard
+    #     wayshot
+    #     pavucontrol
+    #     brightnessctl
+    #     swww
+    #   ];
+
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
         description = "polkit-gnome-authentication-agent-1";
-        wantedBy = ["graphical-session.target"];
-        wants = ["graphical-session.target"];
-        after = ["graphical-session.target"];
+        wantedBy = [ "graphical-session.target" ];
+        wants = [ "graphical-session.target" ];
+        after = [ "graphical-session.target" ];
         serviceConfig = {
           Type = "simple";
           ExecStart = "${pkgs.polkit_gnome}/libexec/polkit-gnome-authentication-agent-1";
@@ -108,26 +132,27 @@
       "d '/var/cache/greeter' - greeter greeter - -"
     ];
 
-    system.activationScripts.wallpaper = let
-      wp = pkgs.writeShellScript "wp" ''
-        CACHE="/var/cache/greeter"
-        OPTS="$CACHE/options.json"
-        HOME="/home/$(find /home -maxdepth 1 -printf '%f\n' | tail -n 1)"
+    system.activationScripts.wallpaper =
+      let
+        wp = pkgs.writeShellScript "wp" ''
+          CACHE="/var/cache/greeter"
+          OPTS="$CACHE/options.json"
+          HOME="/home/$(find /home -maxdepth 1 -printf '%f\n' | tail -n 1)"
 
-        mkdir -p "$CACHE"
-        chown greeter:greeter $CACHE
+          mkdir -p "$CACHE"
+          chown greeter:greeter $CACHE
 
-        if [[ -f "$HOME/.cache/ags/options.json" ]]; then
-          cp $HOME/.cache/ags/options.json $OPTS
-          chown greeter:greeter $OPTS
-        fi
+          if [[ -f "$HOME/.cache/ags/options.json" ]]; then
+            cp $HOME/.cache/ags/options.json $OPTS
+            chown greeter:greeter $OPTS
+          fi
 
-        if [[ -f "$HOME/.config/background" ]]; then
-          cp "$HOME/.config/background" $CACHE/background
-          chown greeter:greeter "$CACHE/background"
-        fi
-      '';
-    in
+          if [[ -f "$HOME/.config/background" ]]; then
+            cp "$HOME/.config/background" $CACHE/background
+            chown greeter:greeter "$CACHE/background"
+          fi
+        '';
+      in
       builtins.readFile wp;
   };
 }
