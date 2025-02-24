@@ -294,4 +294,5 @@ in
   };
 
   home-manager.backupFileExtension = "backup";
+  nixpkgs.config.allowBroken = true;
 }

@@ -23,6 +23,7 @@
       zed-editor
       jetbrains.idea-community
       android-studio
+      code-cursor
 
       #terminal
       ghostty.packages.${pkgs.system}.default
