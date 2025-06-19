@@ -56,7 +56,7 @@
       gnome-clocks
       gnome-software # for flatpak
       wl-gammactl
-      wl-clipboard
+      # wl-clipboard
       wayshot
       pavucontrol
       brightnessctl

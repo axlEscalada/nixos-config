@@ -1,10 +1,11 @@
-{ nixvim
-, ghostty
-, hyprland
-, zls-flake
-, pkgs
-, ...
-}: {
+{
+  nixvim,
+  hyprland,
+  zls-flake,
+  pkgs,
+  ...
+}:
+{
   imports = [
     hyprland.homeManagerModules.default
     ./programs
@@ -16,22 +17,35 @@
     homeDirectory = "/home/axl";
   };
 
-  home.packages =
-    (with pkgs; [
+  home.packages = (
+    with pkgs;
+    [
       #editor
       nixvim.packages.${pkgs.system}.default
       zed-editor
-      jetbrains.idea-community
+      # jetbrains.idea-community
+      jetbrains.idea-ultimate
       android-studio
       code-cursor
 
+      #file explorer
+      pcmanfm
+      #img viewer
+      loupe
+
       #terminal
-      ghostty.packages.${pkgs.system}.default
+      ghostty
+
+      xorg.libXext
+      xorg.libXrender
+      xorg.libXtst
+      xorg.libXi
 
       #lang
       zls-flake.packages.${pkgs.system}.zls
       zigpkgs.master
-      jdk17
+      jdk21
+      freetype
       gcc
       maven
       nodejs
@@ -59,15 +73,15 @@
       betterdiscord-installer
       brave
       google-chrome
-      kooha #screerecorder
-      recapp #screenrecorder
+      kooha # screerecorder
+      recapp # screenrecorder
       gparted
       foliate
-      okular
+      kdePackages.okular
       spotify
       obsidian
       vscode
-      piper #mouseconfig
+      piper # mouseconfig
       libratbag
       burpsuite
       android-tools
@@ -90,6 +104,8 @@
       playerctl
       unzip
       unrar
+      bazel
+
       # cozy
       unixtools.xxd
       nix-index
@@ -101,9 +117,10 @@
       rofi
       nitch
       wget
-      grim #screenshot
-      slurp #screenposition
+      grim # screenshot
+      slurp # screenposition
       wl-clipboard
+      wl-clipboard-x11
       pamixer
       mpc-cli
       tty-clock
@@ -114,7 +131,7 @@
       # copyq
 
       #bluetooth
-      bluedevil
+      kdePackages.bluedevil
       bluez
       # bluez-qt
       gedit
@@ -122,7 +139,8 @@
       zenity
       gnome-tweaks
       eog
-    ]);
+    ]
+  );
 
   programs.home-manager.enable = true;
 

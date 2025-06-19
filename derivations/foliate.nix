@@ -19,33 +19,19 @@
 }:
 stdenv.mkDerivation rec {
   pname = "foliate";
-  version = "3.1.1";
+  # version = "3.1.1";
+  version = "3.3.0";
 
   src = fetchFromGitHub {
-    owner = "axlEscalada";
+    # owner = "axlEscalada";
+    owner = "johnfactotum";
     repo = "foliate";
-    rev = "884046bd12ec88ab9f8b2304752a78cafc16e47e";
-    sha256 = "sha256-3zYFSvbvhqmzNcNgicqpeULy4o7nyznSYM2k6hCL1Mk=";
+    # rev = "884046bd12ec88ab9f8b2304752a78cafc16e47e";
+    rev = "9ab7cf0f47dd67049357b8405cd88b30fa18d282";
+    # sha256 = "sha256-3zYFSvbvhqmzNcNgicqpeULy4o7nyznSYM2k6hCL1Mk=";
+    sha256 = "sha256-xOo+DVBWkJOCELDdCO7n909usU0JX2hNOrbAqNu7tLQ=";
     fetchSubmodules = true;
   };
-
-  # Explicitly fetch submodules
-  # postFetch = ''
-  #   cd $out
-  #   git submodule init
-  #   git submodule update
-  # '';
-  #
-  # preBuild = ''
-  #   echo "Contents of src/foliate-js:"
-  #   ls -la src/foliate-js
-  #   if [ ! -f src/foliate-js/comic-book.js ]; then
-  #     echo "Error: comic-book.js not found in src/foliate-js/"
-  #     echo "Current directory contents:"
-  #     ls -R
-  #     exit 1
-  #   fi
-  # '';
 
   nativeBuildInputs = [
     desktop-file-utils
@@ -72,7 +58,7 @@ stdenv.mkDerivation rec {
     homepage = "https://johnfactotum.github.io/foliate";
     changelog = "https://github.com/axlEscalada/foliate/";
     license = licenses.gpl3Only;
-    maintainers = with maintainers; [onny];
+    maintainers = with maintainers; [ onny ];
     mainProgram = "foliate";
   };
 }
