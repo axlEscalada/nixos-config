@@ -105,6 +105,7 @@
       unzip
       unrar
       bazel
+      bat
 
       # cozy
       unixtools.xxd
