@@ -44,6 +44,14 @@
       inputs.nixpkgs.follows = "nixpkgs";
     };
     sops-nix.url = "github:Mic92/sops-nix";
+    caelestia-shell = {
+      url = "github:caelestia-dots/shell";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
+    caelestia-cli = {
+      url = "github:caelestia-dots/cli";
+      inputs.nixpkgs.follows = "nixpkgs";
+    };
     # marble = {
     #   url = "github:marble-shell/shell";
     #   inputs.nixpkgs.follows = "nixpkgs";
@@ -62,6 +70,8 @@
       language-servers,
       nixvim,
       quickshell,
+      caelestia-shell,
+      caelestia-cli,
       ...
     }:
     let
@@ -93,6 +103,8 @@
               hyprland
               zls-flake
               language-servers
+              caelestia-shell
+              caelestia-cli
               ;
             asztal = self.packages.x86_64-linux.default;
           };

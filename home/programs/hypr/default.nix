@@ -5,20 +5,11 @@
 }:
 let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
-  yt = pkgs.writeShellScript "yt" ''
-    notify-send "Opening video" "$(wl-paste)"
-    mpv "$(wl-paste)"
-  '';
-
   playerctl = "${pkgs.playerctl}/bin/playerctl";
   brightnessctl = "${pkgs.brightnessctl}/bin/brightnessctl";
   pactl = "${pkgs.pulseaudio}/bin/pactl";
 in
 {
-  # imports = [
-  #   ./hyprland-environment.nix
-  # ];
-
   xdg.desktopEntries."org.gnome.Settings" = {
     name = "Settings";
     comment = "Gnome Control Center";
@@ -28,227 +19,70 @@ in
     terminal = false;
   };
 
-  #test later systemd.user.targets.hyprland-session.Unit.Wants = [ "xdg-desktop-autostart.target" ];
+  xdg.configFile = {
+    "hypr/hyprland.conf".text = ''
+      $hypr = ~/.config/hypr
+      $hl = $hypr/hyprland
+      $cConf = ~/.config/caelestia
+
+      # Variables (colours + other vars)
+      exec = cp -L --no-preserve=mode --update=none $hypr/scheme/default.conf $hypr/scheme/current.conf
+      source = $hypr/scheme/current.conf
+      source = $hypr/variables.conf
+
+      # Shell variables
+      exec = touch -a $hypr/shell-vars.conf
+      source = $hypr/shell-vars.conf
+
+      # User variables
+      exec = mkdir -p $cConf && touch -a $cConf/hypr-vars.conf
+      source = $cConf/hypr-vars.conf
+
+      # Default monitor conf
+      # monitor = , preferred, auto, 1
+      # Monitor configuration
+      monitor = DP-3,1920x1080@60,1920x0,1,bitdepth,10
+      monitor = HDMI-A-1,1920x1080,0x0,1,bitdepth,10
+
+      # Configs
+      source = $hl/env.conf
+      source = $hl/general.conf
+      source = $hl/input.conf
+      source = $hl/misc.conf
+      source = $hl/animations.conf
+      source = $hl/decoration.conf
+      source = $hl/group.conf
+      source = $hl/execs.conf
+      source = $hl/rules.conf
+      source = $hl/keybinds.conf
+
+      # User configs
+      exec = mkdir -p $cConf && touch -a $cConf/hypr-user.conf
+      source = $cConf/hypr-user.conf
+    '';
+
+    "hypr/variables.conf".source = ./hyprland/variables.conf;
+    "hypr/scheme/default.conf".source = ./hyprland/scheme/default.conf;
+    "hypr/scripts/wsaction.fish" = {
+      source = ./hyprland/scripts/wsaction.fish;
+      executable = true;
+    };
+    "hypr/hyprland/env.conf".source = ./hyprland/env.conf;
+    "hypr/hyprland/general.conf".source = ./hyprland/general.conf;
+    "hypr/hyprland/input.conf".source = ./hyprland/input.conf;
+    "hypr/hyprland/misc.conf".source = ./hyprland/misc.conf;
+    "hypr/hyprland/animations.conf".source = ./hyprland/animations.conf;
+    "hypr/hyprland/decoration.conf".source = ./hyprland/decoration.conf;
+    "hypr/hyprland/group.conf".source = ./hyprland/group.conf;
+    "hypr/hyprland/execs.conf".source = ./hyprland/execs.conf;
+    "hypr/hyprland/rules.conf".source = ./hyprland/rules.conf;
+    "hypr/hyprland/keybinds.conf".source = ./hyprland/keybinds.conf;
+  };
+
   wayland.windowManager.hyprland = {
     enable = true;
     package = hyprland;
     systemd.enable = true;
     xwayland.enable = true;
-    settings = {
-      exec-once = [
-        # "ags -b hypr"
-        "asztal"
-        "hyprctl setcursor Qogir 24"
-        "wl-paste -p --watch wl-copy -p"
-      ];
-
-      monitor = [
-        "DP-3,1920x1080@60,1920x0,1,bitdepth,10"
-        "HDMI-A-1,1920x1080,0x0,1,bitdepth,10"
-      ];
-
-      general = {
-        layout = "dwindle";
-        resize_on_border = true;
-      };
-
-      misc = {
-        disable_splash_rendering = true;
-        force_default_wallpaper = 1;
-      };
-
-      input = {
-        kb_layout = "us";
-        follow_mouse = 1;
-        touchpad = {
-          natural_scroll = "yes";
-          disable_while_typing = true;
-          drag_lock = true;
-        };
-        sensitivity = 0;
-        float_switch_override_focus = 2;
-      };
-
-      binds = {
-        allow_workspace_cycles = true;
-      };
-
-      dwindle = {
-        pseudotile = "yes";
-        preserve_split = "yes";
-        # no_gaps_when_only = "yes";
-      };
-
-      gestures = {
-        workspace_swipe = true;
-        workspace_swipe_use_r = true;
-      };
-
-      windowrule =
-        let
-          f = regex: "float,class:^(${regex})$";
-        in
-        [
-          (f "org.gnome.Calculator")
-          (f "org.gnome.Nautilus")
-          (f "pavucontrol")
-          (f "nm-connection-editor")
-          (f "blueberry.py")
-          (f "org.gnome.Settings")
-          (f "org.gnome.design.Palette")
-          (f "Color Picker")
-          (f "xdg-desktop-portal")
-          (f "xdg-desktop-portal-gnome")
-          (f "transmission-gtk")
-          (f "com.github.Aylur.ags")
-          "workspace 7,title:^(.*Spotify.*)$"
-        ];
-
-      bind =
-        let
-          binding =
-            mod: cmd: key: arg:
-            "${mod}, ${key}, ${cmd}, ${arg}";
-          mvfocus = binding "SUPER" "movefocus";
-          ws = binding "SUPER" "workspace";
-          resizeactive = binding "SUPER CTRL" "resizeactive";
-          mvactive = binding "SUPER ALT" "moveactive";
-          mvtows = binding "SUPER SHIFT" "movetoworkspace";
-          arr = [
-            1
-            2
-            3
-            4
-            5
-            6
-            7
-          ];
-        in
-        [
-          "CTRL SHIFT, R, exec,         asztal quit; asztal"
-          "SUPER, R, exec,              asztal -t launcher"
-          "SUPER, Tab, exec,            asztal -t overview"
-          ",XF86PowerOff, exec,         asztal -t powermenu"
-          ",XF86Launch4, exec,          screenrecord"
-          "SHIFT, XF86Launch4, exec,    screenrecord --full"
-          ",Print, exec,                screenshot"
-          "SHIFT, Print, exec,          screenshot --full"
-          "SUPER, Return, exec,         xterm" # xterm is a symlink, not actually xterm
-          "SUPER, W, exec,              firefox"
-          "SUPER, E, exec,              ghostty"
-
-          "ALT, Tab, focuscurrentorlast"
-          "CTRL ALT, Delete, exit"
-          "SUPER, K, killactive"
-          "SUPER, F, togglefloating"
-          "SUPER, G, fullscreen"
-          "SUPER, O, fullscreenstate"
-          "SUPER, P, togglesplit"
-
-          (mvfocus "k" "u")
-          (mvfocus "j" "d")
-          (mvfocus "l" "r")
-          (mvfocus "h" "l")
-          (ws "left" "e-1")
-          (ws "right" "e+1")
-          (mvtows "left" "e-1")
-          (mvtows "right" "e+1")
-          (resizeactive "k" "0 -20")
-          (resizeactive "j" "0 20")
-          (resizeactive "l" "20 0")
-          (resizeactive "h" "-20 0")
-          (mvactive "k" "0 -20")
-          (mvactive "j" "0 20")
-          (mvactive "l" "20 0")
-          (mvactive "h" "-20 0")
-        ]
-        ++ (map (i: ws (toString i) (toString i)) arr)
-        ++ (map (i: mvtows (toString i) (toString i)) arr);
-
-      bindle = [
-        ",XF86MonBrightnessUp,   exec, ${brightnessctl} set +5%"
-        ",XF86MonBrightnessDown, exec, ${brightnessctl} set  5%-"
-        ",XF86KbdBrightnessUp,   exec, ${brightnessctl} -d asus::kbd_backlight set +1"
-        ",XF86KbdBrightnessDown, exec, ${brightnessctl} -d asus::kbd_backlight set  1-"
-        ",XF86AudioRaiseVolume,  exec, ${pactl} set-sink-volume @DEFAULT_SINK@ +5%"
-        ",XF86AudioLowerVolume,  exec, ${pactl} set-sink-volume @DEFAULT_SINK@ -5%"
-      ];
-
-      bindl = [
-        ",XF86AudioPlay,    exec, ${playerctl} play-pause"
-        ",XF86AudioStop,    exec, ${playerctl} pause"
-        ",XF86AudioPause,   exec, ${playerctl} pause"
-        ",XF86AudioPrev,    exec, ${playerctl} previous"
-        ",XF86AudioNext,    exec, ${playerctl} next"
-        ",XF86AudioMicMute, exec, ${pactl} set-source-mute @DEFAULT_SOURCE@ toggle"
-      ];
-
-      bindm = [
-        "SUPER, mouse:273, resizewindow"
-        "SUPER, mouse:272, movewindow"
-      ];
-
-      decoration = {
-        shadow = {
-          enabled = true;
-          range = 0;
-          # enabled = true;
-          # range = 8;
-          # render_power = 2;
-          # color = "rgba(00000044)";
-        };
-
-        dim_inactive = false;
-
-        blur = {
-          enabled = false;
-          size = 8;
-          passes = 3;
-          new_optimizations = "on";
-          noise = 0.01;
-          contrast = 0.9;
-          brightness = 0.8;
-          popups = true;
-        };
-      };
-
-      animations = {
-        enabled = "yes";
-        bezier = "myBezier, 0.05, 0.9, 0.1, 1.05";
-        animation = [
-          "windows, 1, 5, myBezier"
-          "windowsOut, 1, 7, default, popin 80%"
-          "border, 1, 10, default"
-          "fade, 1, 7, default"
-          "workspaces, 1, 6, default"
-        ];
-      };
-
-      plugin = {
-        overview = {
-          centerAligned = true;
-          hideTopLayers = true;
-          hideOverlayLayers = true;
-          showNewWorkspace = true;
-          exitOnClick = true;
-          exitOnSwitch = true;
-          drawActiveWorkspace = true;
-          reverseSwipe = true;
-        };
-        hyprbars = {
-          bar_color = "rgb(2a2a2a)";
-          bar_height = 28;
-          col_text = "rgba(ffffffdd)";
-          bar_text_size = 11;
-          bar_text_font = "Ubuntu Nerd Font";
-
-          buttons = {
-            button_size = 0;
-            "col.maximize" = "rgba(ffffff11)";
-            "col.close" = "rgba(ff111133)";
-          };
-        };
-      };
-    };
   };
 }

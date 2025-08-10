@@ -24,6 +24,9 @@
     [
       #Desktop ui
       inputs.quickshell.packages.${pkgs.system}.default
+      inputs.caelestia-shell.packages.${pkgs.system}.default
+      inputs.caelestia-cli.packages.${pkgs.system}.default
+
       #editor
       nixvim.packages.${pkgs.system}.default
       zed-editor
