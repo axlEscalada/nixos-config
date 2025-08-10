@@ -50,6 +50,10 @@
   hardware.cpu.amd.updateMicrocode = lib.mkDefault config.hardware.enableRedistributableFirmware;
   # hardware.opengl.driSupport = true;
   # hardware.opengl.driSupport32Bit = true;
+  hardware.graphics = {
+    enable = true;
+    enable32Bit = true; # if needed
+  };
   hardware.opengl.extraPackages = with pkgs; [
     # rocm-opencl-icd
     # rocm-opencl-runtime

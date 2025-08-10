@@ -1,6 +1,7 @@
-{ inputs
-, pkgs
-, ...
+{
+  inputs,
+  pkgs,
+  ...
 }:
 let
   hyprland = inputs.hyprland.packages.${pkgs.system}.hyprland;
@@ -38,7 +39,6 @@ in
         # "ags -b hypr"
         "asztal"
         "hyprctl setcursor Qogir 24"
-        "transmission-gtk"
         "wl-paste -p --watch wl-copy -p"
       ];
 
@@ -86,7 +86,7 @@ in
 
       windowrule =
         let
-          f = regex: "float, ^(${regex})$";
+          f = regex: "float,class:^(${regex})$";
         in
         [
           (f "org.gnome.Calculator")
@@ -101,18 +101,28 @@ in
           (f "xdg-desktop-portal-gnome")
           (f "transmission-gtk")
           (f "com.github.Aylur.ags")
-          "workspace 7, title:Spotify"
+          "workspace 7,title:^(.*Spotify.*)$"
         ];
 
       bind =
         let
-          binding = mod: cmd: key: arg: "${mod}, ${key}, ${cmd}, ${arg}";
+          binding =
+            mod: cmd: key: arg:
+            "${mod}, ${key}, ${cmd}, ${arg}";
           mvfocus = binding "SUPER" "movefocus";
           ws = binding "SUPER" "workspace";
           resizeactive = binding "SUPER CTRL" "resizeactive";
           mvactive = binding "SUPER ALT" "moveactive";
           mvtows = binding "SUPER SHIFT" "movetoworkspace";
-          arr = [ 1 2 3 4 5 6 7 ];
+          arr = [
+            1
+            2
+            3
+            4
+            5
+            6
+            7
+          ];
         in
         [
           "CTRL SHIFT, R, exec,         asztal quit; asztal"
@@ -181,9 +191,11 @@ in
       decoration = {
         shadow = {
           enabled = true;
-          range = 8;
-          render_power = 2;
-          color = "rgba(00000044)";
+          range = 0;
+          # enabled = true;
+          # range = 8;
+          # render_power = 2;
+          # color = "rgba(00000044)";
         };
 
         dim_inactive = false;

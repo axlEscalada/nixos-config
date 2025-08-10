@@ -15,10 +15,11 @@
     # ./waybar
     # ./waybar/swayidle.nix
     # ./waybar/swaylock.nix
+    # ./sops
     ./wezterm
     ./zathura
     # ./zed
     ./zellij
-    ./zsh
+    # ./zsh
   ];
 }

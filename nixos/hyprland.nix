@@ -40,6 +40,7 @@
 
     environment.systemPackages = with pkgs; [
       morewaita-icon-theme
+      hicolor-icon-theme
       adwaita-icon-theme
       qogir-icon-theme
       loupe

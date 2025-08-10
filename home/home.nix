@@ -1,4 +1,5 @@
 {
+  inputs,
   nixvim,
   hyprland,
   zls-flake,
@@ -10,6 +11,7 @@
     hyprland.homeManagerModules.default
     ./programs
     ./scripts
+    inputs.zen-browser.homeModules.beta
   ];
 
   home = {
@@ -20,16 +22,19 @@
   home.packages = (
     with pkgs;
     [
+      #Desktop ui
+      inputs.quickshell.packages.${pkgs.system}.default
       #editor
       nixvim.packages.${pkgs.system}.default
       zed-editor
       # jetbrains.idea-community
-      jetbrains.idea-ultimate
+      # jetbrains.idea-ultimate #failing at 18/07/25
       android-studio
       code-cursor
 
       #file explorer
-      pcmanfm
+      nautilus
+      # pcmanfm
       #img viewer
       loupe
 
@@ -41,7 +46,12 @@
       xorg.libXtst
       xorg.libXi
 
+      #Desktop
+      # inputs.marble.packages.${pkgs.system}.default
+
       #lang
+	  lua-language-server
+	  clang-tools
       zls-flake.packages.${pkgs.system}.zls
       zigpkgs.master
       jdk21
@@ -61,6 +71,10 @@
       erlang
       rebar3
 
+      # Browser
+      brave
+      google-chrome
+
       #User Apps
       celluloid
       discord
@@ -71,8 +85,6 @@
       lutris
       openrgb
       betterdiscord-installer
-      brave
-      google-chrome
       kooha # screerecorder
       recapp # screenrecorder
       gparted
@@ -87,6 +99,7 @@
       android-tools
 
       #utils
+      psmisc
       gdb
       ripgrep
       jq
@@ -131,6 +144,9 @@
       # nerdfonts
       # copyq
 
+	  #neovim tools
+	  lazygit
+
       #bluetooth
       kdePackages.bluedevil
       bluez
@@ -144,6 +160,7 @@
   );
 
   programs.home-manager.enable = true;
+  programs.zen-browser.enable = true;
 
   home.stateVersion = "23.05";
 }

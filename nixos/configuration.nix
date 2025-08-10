@@ -138,6 +138,9 @@ in
   environment.homeBinInPath = true;
 
   environment.systemPackages = with pkgs; [
+    mesa
+    libGL
+    libGLU
     virt-manager
     virt-viewer
     spice-gtk

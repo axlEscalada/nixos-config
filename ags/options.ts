@@ -28,17 +28,17 @@ const options = mkOptions(OPTIONS, {
         },
         light: {
             primary: {
-                bg: opt("#426ede"),
-                fg: opt("#eeeeee"),
+                bg: opt("#593177"),
+                fg: opt("#613583"),
             },
             error: {
-                bg: opt("#b13558"),
+                bg: opt("#e55f86"),
                 fg: opt("#eeeeee"),
             },
-            bg: opt("#fffffa"),
-            fg: opt("#080808"),
-            widget: opt("#080808"),
-            border: opt("#080808"),
+            bg: opt("#813d9c"),
+            fg: opt("#c0bfbc"),
+            widget: opt("#eeeeee"),
+            border: opt("#171717"),
         },
 
         blur: opt(0),
@@ -46,19 +46,19 @@ const options = mkOptions(OPTIONS, {
         widget: { opacity: opt(94) },
         border: {
             width: opt(1),
-            opacity: opt(96),
+            opacity: opt(10),
         },
 
         shadows: opt(true),
-        padding: opt(7),
-        spacing: opt(12),
-        radius: opt(11),
+        padding: opt(4),
+        spacing: opt(5),
+        radius: opt(5),
     },
 
     transition: opt(200),
 
     font: {
-        size: opt(13),
+        size: opt(11),
         name: opt("Ubuntu Nerd Font"),
     },
 

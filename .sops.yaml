@@ -1,0 +1,11 @@
+keys:
+  - &users:
+    - &axl age1s6r6xt7r33pjqtmr6mnlwx4qfqqxhn4n56u8n48jxgg5e7rfguusav33yl
+  - &hosts:
+    - &guppy age1zh83mv80hgnuv69d9s8z7l4q973e0ypt2cag4wdesakljkctc3uqspcajt
+creation_rules:
+  - path_regex: secrets.yaml$
+    key_groups:
+    - age:
+      - *axl
+      - *guppy
