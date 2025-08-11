@@ -1,6 +1,5 @@
 {
   imports = [
-    ./ags
     ./dunst
     ./eww
     ./helix
@@ -12,9 +11,6 @@
     ./tmux
     ./theme.nix
     ./alacritty
-    # ./waybar
-    # ./waybar/swayidle.nix
-    # ./waybar/swaylock.nix
     # ./sops
     ./wezterm
     ./zathura

@@ -26,12 +26,6 @@
     };
     nixvim.url = "github:axlEscalada/nixvim";
     matugen.url = "github:Iniox/matugen?ref=v2.0.0";
-    # ags.url = "github:axlEscalada/ags";
-    ags = {
-      url = "github:Aylur/ags";
-      inputs.nixpkgs.follows = "nixpkgs";
-    };
-    astal.url = "github:Aylur/astal";
     zen-browser = {
       url = "github:0xc000022070/zen-browser-flake";
       inputs.nixpkgs.follows = "nixpkgs";
@@ -52,10 +46,6 @@
       url = "github:caelestia-dots/cli";
       inputs.nixpkgs.follows = "nixpkgs";
     };
-    # marble = {
-    #   url = "github:marble-shell/shell";
-    #   inputs.nixpkgs.follows = "nixpkgs";
-    # };
   };
 
   outputs =
@@ -78,9 +68,6 @@
       lib = nixpkgs.lib;
       overlays = [
         zig.overlays.default
-        # (final: prev: {
-        #   foliate = final.callPackage ./derivations/foliate.nix { };
-        # })
       ];
     in
     {
@@ -89,7 +76,7 @@
       };
 
       packages.x86_64-linux = {
-        default = nixpkgs.legacyPackages.x86_64-linux.callPackage ./ags { inherit inputs; };
+        default = nixpkgs.legacyPackages.x86_64-linux.callPackage { inherit inputs; };
         # foliate = nixpkgs.legacyPackages.x86_64-linux.callPackage ./foliate.nix { };
       };
 

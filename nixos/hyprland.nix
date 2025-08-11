@@ -1,7 +1,6 @@
 { pkgs
 , inputs
 , config
-, asztal
 , lib
 , ...
 }: {
@@ -35,7 +34,6 @@
     services.flatpak.enable = true;
     security = {
       polkit.enable = true;
-      pam.services.ags = { };
     };
 
     environment.systemPackages = with pkgs; [
@@ -57,37 +55,11 @@
       gnome-clocks
       gnome-software # for flatpak
       wl-gammactl
-      # wl-clipboard
       wayshot
       pavucontrol
       brightnessctl
       swww
     ];
-
-    # environment.systemPackages = with pkgs;
-    #   with gnome; [
-    #     morewaita-icon-theme
-    #     adwaita-icon-theme
-    #     qogir-icon-theme
-    #     loupe
-    #     nautilus
-    #     baobab
-    #     gnome-text-editor
-    #     gnome-calendar
-    #     gnome-boxes
-    #     gnome-system-monitor
-    #     gnome-control-center
-    #     gnome-weather
-    #     gnome-calculator
-    #     gnome-clocks
-    #     gnome-software # for flatpak
-    #     wl-gammactl
-    #     wl-clipboard
-    #     wayshot
-    #     pavucontrol
-    #     brightnessctl
-    #     swww
-    #   ];
 
     systemd = {
       user.services.polkit-gnome-authentication-agent-1 = {
@@ -120,15 +92,6 @@
       };
     };
 
-    # services.greetd = {
-    #   enable = true;
-    #   settings.default_session.command = pkgs.writeShellScript "greeter" ''
-    #     export XKB_DEFAULT_LAYOUT=${config.services.xserver.xkb.layout}
-    #     export XCURSOR_THEME=Qogir
-    #     ${asztal}/bin/greeter
-    #   '';
-    # };
-
     systemd.tmpfiles.rules = [
       "d '/var/cache/greeter' - greeter greeter - -"
     ];
@@ -142,11 +105,6 @@
 
           mkdir -p "$CACHE"
           chown greeter:greeter $CACHE
-
-          if [[ -f "$HOME/.cache/ags/options.json" ]]; then
-            cp $HOME/.cache/ags/options.json $OPTS
-            chown greeter:greeter $OPTS
-          fi
 
           if [[ -f "$HOME/.config/background" ]]; then
             cp "$HOME/.config/background" $CACHE/background
