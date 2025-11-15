@@ -187,6 +187,7 @@ in
   environment.sessionVariables = {
     WRL_NO_HARDWARE_CURSORS = "1";
     NIXOS_OZONE_WL = "1";
+    EDITOR = "nvim";
   };
 
   services.pipewire = {
