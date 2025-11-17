@@ -53,8 +53,8 @@
       # inputs.marble.packages.${pkgs.system}.default
 
       #lang
-	  lua-language-server
-	  clang-tools
+      lua-language-server
+      clang-tools
       zls-flake.packages.${pkgs.system}.zls
       zigpkgs.master
       jdk21
@@ -100,6 +100,7 @@
       libratbag
       burpsuite
       android-tools
+      mpv
 
       #utils
       psmisc
