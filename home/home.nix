@@ -103,6 +103,8 @@
       mpv
 
       #utils
+      pgcli
+      awscli2
       psmisc
       gdb
       ripgrep

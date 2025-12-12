@@ -85,7 +85,7 @@ in
     firewall = {
       enable = true;
       allowedTCPPorts = [ 6800 62345 ];
-      allowedUDPPorts = [ 52150 ];
+      allowedUDPPorts = [ 52150 41641 ];
     };
   };
   # networking.wireless.enable = true;  # Enables wireless support via wpa_supplicant.
@@ -111,6 +111,7 @@ in
     LC_TIME = "es_AR.UTF-8";
   };
 
+  services.tailscale.enable = true;
   # Configure keymap in X11
   services.xserver = {
     exportConfiguration = true;
@@ -138,6 +139,7 @@ in
   environment.homeBinInPath = true;
 
   environment.systemPackages = with pkgs; [
+    tailscale
     mesa
     libGL
     libGLU
